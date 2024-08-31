@@ -10,10 +10,10 @@
 NotebookFileLineBreakTest
 NotebookFileLineBreakTest
 NotebookDataPosition[       158,          7]
-NotebookDataLength[    167335,       3443]
-NotebookOptionsPosition[    166519,       3422]
-NotebookOutlinePosition[    166959,       3439]
-CellTagsIndexPosition[    166916,       3436]
+NotebookDataLength[     39703,        809]
+NotebookOptionsPosition[     38888,        788]
+NotebookOutlinePosition[     39328,        805]
+CellTagsIndexPosition[     39285,        802]
 WindowFrame->Normal*)
 
 (* Beginning of Notebook Content *)
@@ -26,7 +26,7 @@ Cell[BoxData[{
     RowBox[{"Today", ",", "\"\<Year\>\""}], "]"}]}], 
   ";"}], "\[IndentingNewLine]", 
  RowBox[{
-  RowBox[{"YTD", "=", 
+  RowBox[{"beginingOfTheYear", "=", 
    RowBox[{"DateObject", "[", 
     RowBox[{"{", 
      RowBox[{"currentYear", ",", "1", ",", "1"}], "}"}], "]"}]}], 
@@ -57,20 +57,14 @@ Cell[BoxData[{
       "\"\<OEF\>\"", ",", "\"\<IWM\>\"", ",", "\"\<JEPI\>\"", ",", 
       "\"\<JEPQ\>\"", ",", "\"\<SCHD\>\"", ",", "\"\<SCHG\>\"", ",", 
       "\"\<^000001\>\"", ",", "\"\<^HSI\>\""}], "}"}], "//", "Sort"}]}], 
-  ";"}]}], "Input",
- CellChangeTimes->{{3.9340758246936617`*^9, 3.934075895698051*^9}, {
-  3.9340759442599907`*^9, 3.934076036981666*^9}, {3.934082523175324*^9, 
-  3.9340825464260693`*^9}, {3.9340871062301807`*^9, 3.934087134206855*^9}, {
-  3.9340871890544767`*^9, 3.934087196682519*^9}, {3.9340875675774117`*^9, 
-  3.934087601546288*^9}, {3.934088096514929*^9, 3.934088102060947*^9}, {
-  3.934088840114605*^9, 3.934088990421154*^9}, {3.9340890638975782`*^9, 
-  3.9340890663707952`*^9}, {3.934089246347981*^9, 3.9340892844492903`*^9}, {
-  3.934089358899678*^9, 3.9340893609422894`*^9}, {3.9340896391004868`*^9, 
-  3.9340896436681547`*^9}, {3.934089677460984*^9, 3.934089679892476*^9}, {
-  3.934091227543128*^9, 3.934091245096455*^9}},
- NumberMarks->False,ExpressionUUID->"59035411-372f-4924-bc76-32ba4bade73c"],
-
-Cell[BoxData[
+  ";"}], "\n", 
+ RowBox[{
+  RowBox[{"YTD", "[", "x_", "]"}], ":=", 
+  RowBox[{"TimeSeriesWindow", "[", 
+   RowBox[{"x", ",", 
+    RowBox[{"{", 
+     RowBox[{"beginingOfTheYear", ",", "Today"}], "}"}]}], 
+   "]"}]}], "\[IndentingNewLine]", 
  RowBox[{
   RowBox[{"getMDD", "=", 
    RowBox[{"Compile", "[", 
@@ -153,11 +147,20 @@ Cell[BoxData[
       RowBox[{"{", "Listable", "}"}]}], ",", 
      RowBox[{"Parallelization", "->", "True"}], ",", 
      RowBox[{"RuntimeOptions", "->", "\"\<Speed\>\""}]}], "]"}]}], 
-  ";"}]], "Input",
- CellChangeTimes->{{3.934082374518207*^9, 3.934082414454866*^9}, {
-  3.934082977108444*^9, 3.934083021211206*^9}, {3.934083052160425*^9, 
-  3.9340830565365143`*^9}, {3.9340852486403637`*^9, 3.934085255679226*^9}},
- CellLabel->"In[35]:=",ExpressionUUID->"94155444-c99c-43ec-b907-7879387fe901"],
+  ";"}]}], "Input",
+ CellChangeTimes->{{3.93407582469366*^9, 3.934075895698051*^9}, {
+   3.9340759442599907`*^9, 3.934076036981666*^9}, {3.934082523175324*^9, 
+   3.9340825464260693`*^9}, {3.9340871062301807`*^9, 3.934087134206855*^9}, {
+   3.9340871890544767`*^9, 3.934087196682519*^9}, {3.9340875675774136`*^9, 
+   3.934087601546288*^9}, {3.934088096514929*^9, 3.934088102060947*^9}, {
+   3.934088840114605*^9, 3.934088990421154*^9}, {3.9340890638975782`*^9, 
+   3.934089066370795*^9}, {3.934089246347981*^9, 3.9340892844492903`*^9}, {
+   3.934089358899678*^9, 3.9340893609422894`*^9}, {3.934089639100486*^9, 
+   3.9340896436681547`*^9}, {3.934089677460984*^9, 3.934089679892476*^9}, {
+   3.934091227543128*^9, 3.934091245096455*^9}, 3.9340953855283833`*^9, {
+   3.934098402010639*^9, 3.934098420781506*^9}, {3.934098657519944*^9, 
+   3.934098657928104*^9}},
+ NumberMarks->False,ExpressionUUID->"59035411-372f-4924-bc76-32ba4bade73c"],
 
 Cell[BoxData[{
  RowBox[{
@@ -172,7 +175,10 @@ Cell[BoxData[{
       RowBox[{"start", ",", "Today", ",", "\"\<Day\>\""}], "}"}]}], "]"}]}], 
   ";"}], "\[IndentingNewLine]", 
  RowBox[{
-  RowBox[{"ClearAll", "[", "close", "]"}], ";"}], "\n", 
+  RowBox[{"return", "=", 
+   RowBox[{"AssociationThread", "[", 
+    RowBox[{"tickers", "->", "return"}], "]"}]}], 
+  ";"}], "\[IndentingNewLine]", 
  RowBox[{
   RowBox[{"close", "=", 
    RowBox[{"FinancialData", "[", 
@@ -185,13 +191,8 @@ Cell[BoxData[{
    RowBox[{"AssociationThread", "[", 
     RowBox[{"tickers", "->", "close"}], "]"}]}], ";"}], "\[IndentingNewLine]", 
  RowBox[{
-  RowBox[{"data", "=", 
-   RowBox[{"AssociationThread", "[", 
-    RowBox[{"tickers", "->", "return"}], "]"}]}], 
-  ";"}], "\[IndentingNewLine]", 
- RowBox[{
   RowBox[{"benchmark", "=", 
-   RowBox[{"data", "[", "\"\<VT\>\"", "]"}]}], ";"}], "\[IndentingNewLine]", 
+   RowBox[{"return", "[", "\"\<VT\>\"", "]"}]}], ";"}], "\[IndentingNewLine]", 
  RowBox[{
   RowBox[{"days", "=", 
    RowBox[{
@@ -201,340 +202,190 @@ Cell[BoxData[{
  CellChangeTimes->{{3.93407296759823*^9, 3.9340729924876337`*^9}, {
    3.934073054253737*^9, 3.9340730558343287`*^9}, {3.934074800724016*^9, 
    3.934074802553857*^9}, {3.9340748776355457`*^9, 3.934074878488916*^9}, {
-   3.934075079534399*^9, 3.934075111873074*^9}, {3.9340751695480757`*^9, 
-   3.9340751698771276`*^9}, 3.934076936505007*^9, {3.9340787157385406`*^9, 
+   3.934075079534399*^9, 3.934075111873074*^9}, {3.934075169548075*^9, 
+   3.934075169877127*^9}, 3.934076936505007*^9, {3.93407871573854*^9, 
    3.934078735482029*^9}, {3.934082505041626*^9, 3.934082515767549*^9}, {
-   3.934082786895488*^9, 3.9340828048986588`*^9}, {3.9340828515868196`*^9, 
-   3.9340828602125607`*^9}, {3.934090797727236*^9, 3.9340908090980263`*^9}},
- CellLabel->"In[36]:=",ExpressionUUID->"6dbb2790-1b78-4834-b4e5-e93d1c62f2ae"],
+   3.934082786895488*^9, 3.934082804898658*^9}, {3.934082851586819*^9, 
+   3.9340828602125607`*^9}, {3.934090797727236*^9, 3.9340908090980263`*^9}, {
+   3.934095601416106*^9, 3.934095612407045*^9}, 3.934095650630863*^9},
+ CellLabel->"In[31]:=",ExpressionUUID->"6dbb2790-1b78-4834-b4e5-e93d1c62f2ae"],
 
-Cell[CellGroupData[{
-
-Cell[BoxData[{
+Cell[BoxData[
  RowBox[{
-  RowBox[{"\[Mu]", "=", 
+  RowBox[{"CAPM", "[", 
+   RowBox[{"close_", ",", "return_", ",", "by_"}], "]"}], ":=", 
+  RowBox[{"Module", "[", 
    RowBox[{
-    RowBox[{
+    RowBox[{"{", 
      RowBox[{
-      RowBox[{"NSolve", "[", 
+     "\[Mu]", ",", "\[Sigma]", ",", "s", ",", "\[Alpha]", ",", "\[Beta]", ",",
+       "MDD", ",", "VaR", ",", "stats"}], "}"}], ",", "\[IndentingNewLine]", 
+    RowBox[{
+     RowBox[{"\[Mu]", "=", 
+      RowBox[{
        RowBox[{
         RowBox[{
-         SuperscriptBox[
-          RowBox[{"(", 
-           RowBox[{"1", "+", "r"}], ")"}], 
-          FractionBox["days", "252"]], "==", 
-         FractionBox[
-          RowBox[{"#", "[", "\"\<LastValue\>\"", "]"}], 
-          RowBox[{"#", "[", "\"\<FirstValue\>\"", "]"}]]}], ",", "r", ",", 
-        "Reals"}], "]"}], "[", 
-      RowBox[{"[", 
-       RowBox[{"1", ",", "1", ",", "2"}], "]"}], "]"}], "&"}], "/@", 
-    "close"}]}], ";"}], "\[IndentingNewLine]", 
- RowBox[{
-  RowBox[{"\[Sigma]", "=", 
-   RowBox[{
-    RowBox[{
-     RowBox[{
-      SqrtBox["252"], 
-      RowBox[{"UnitSimplify", "@", 
-       RowBox[{"StandardDeviation", "[", "#", "]"}]}]}], "&"}], "/@", 
-    "data"}]}], ";"}], "\[IndentingNewLine]", 
- RowBox[{
-  RowBox[{"s", "=", 
-   RowBox[{"QuantityMagnitude", "[", 
-    RowBox[{"\[Mu]", "/", "\[Sigma]"}], "]"}]}], ";"}], "\[IndentingNewLine]", 
- RowBox[{
-  RowBox[{"\[Beta]", "=", 
-   RowBox[{
-    RowBox[{
-     FractionBox[
-      RowBox[{"Covariance", "@@", 
+         RowBox[{"NSolve", "[", 
+          RowBox[{
+           RowBox[{
+            SuperscriptBox[
+             RowBox[{"(", 
+              RowBox[{"1", "+", "r"}], ")"}], 
+             FractionBox["days", "252"]], "==", 
+            FractionBox[
+             RowBox[{"#", "[", "\"\<LastValue\>\"", "]"}], 
+             RowBox[{"#", "[", "\"\<FirstValue\>\"", "]"}]]}], ",", "r", ",", 
+           "Reals"}], "]"}], "[", 
+         RowBox[{"[", 
+          RowBox[{"1", ",", "1", ",", "2"}], "]"}], "]"}], "&"}], "/@", 
+       "close"}]}], ";", "\[IndentingNewLine]", 
+     RowBox[{"\[Sigma]", "=", 
+      RowBox[{
        RowBox[{
-        RowBox[{"TimeSeriesResample", "[", 
+        RowBox[{
+         SqrtBox["252"], 
+         RowBox[{"UnitSimplify", "@", 
+          RowBox[{"StandardDeviation", "[", "#", "]"}]}]}], "&"}], "/@", 
+       "return"}]}], ";", "\[IndentingNewLine]", 
+     RowBox[{"s", "=", 
+      RowBox[{"QuantityMagnitude", "[", 
+       RowBox[{"\[Mu]", "/", "\[Sigma]"}], "]"}]}], ";", 
+     "\[IndentingNewLine]", 
+     RowBox[{"\[Beta]", "=", 
+      RowBox[{
+       RowBox[{
+        FractionBox[
+         RowBox[{"Covariance", "@@", 
+          RowBox[{
+           RowBox[{"TimeSeriesResample", "[", 
+            RowBox[{
+             RowBox[{"{", 
+              RowBox[{"#", ",", "benchmark"}], "}"}], ",", 
+             "\"\<Intersection\>\""}], "]"}], "[", 
+           RowBox[{"[", 
+            RowBox[{"All", ",", "All", ",", "2"}], "]"}], "]"}]}], 
+         RowBox[{"Variance", "@", "benchmark"}]], "&"}], "/@", "return"}]}], 
+     ";", "\[IndentingNewLine]", 
+     RowBox[{"\[Alpha]", "=", 
+      RowBox[{"\[Mu]", "-", 
+       RowBox[{"\[Beta]", "\[Times]", 
+        RowBox[{"\[Mu]", "[", "\"\<VT\>\"", "]"}]}]}]}], ";", 
+     "\[IndentingNewLine]", 
+     RowBox[{"MDD", "=", 
+      RowBox[{
+       RowBox[{
+        RowBox[{"getMDD", "[", 
+         RowBox[{"QuantityMagnitude", "@", 
+          RowBox[{"Normal", "@", 
+           RowBox[{"#", "[", "\"\<Values\>\"", "]"}]}]}], "]"}], "&"}], "/@", 
+       "close"}]}], ";", "\[IndentingNewLine]", 
+     RowBox[{"VaR", "=", 
+      RowBox[{
+       RowBox[{
+        RowBox[{"Quantile", "[", 
          RowBox[{
-          RowBox[{"{", 
-           RowBox[{"#", ",", "benchmark"}], "}"}], ",", 
-          "\"\<Intersection\>\""}], "]"}], "[", 
-        RowBox[{"[", 
-         RowBox[{"All", ",", "All", ",", "2"}], "]"}], "]"}]}], 
-      RowBox[{"Variance", "@", "benchmark"}]], "&"}], "/@", "data"}]}], 
-  ";"}], "\[IndentingNewLine]", 
- RowBox[{
-  RowBox[{"\[Alpha]", "=", 
-   RowBox[{"\[Mu]", "-", 
-    RowBox[{"\[Beta]", "\[Times]", 
-     RowBox[{"\[Mu]", "[", "\"\<VT\>\"", "]"}]}]}]}], 
-  ";"}], "\[IndentingNewLine]", 
- RowBox[{
-  RowBox[{"MDD", "=", 
-   RowBox[{
-    RowBox[{
-     RowBox[{"getMDD", "[", 
-      RowBox[{"QuantityMagnitude", "@", 
-       RowBox[{"Normal", "@", 
-        RowBox[{"#", "[", "\"\<Values\>\"", "]"}]}]}], "]"}], "&"}], "/@", 
-    "close"}]}], ";"}], "\[IndentingNewLine]", 
- RowBox[{
-  RowBox[{"symbols", "=", 
-   RowBox[{"{", 
-    RowBox[{
-    "\[Mu]", ",", "\[Sigma]", ",", "s", ",", "\[Alpha]", ",", "\[Beta]", ",", 
-     "MDD"}], "}"}]}], ";"}], "\[IndentingNewLine]", 
- RowBox[{
-  RowBox[{"columns", "=", 
-   RowBox[{"{", 
-    RowBox[{
-    "\"\<\[Mu]\>\"", ",", "\"\<\[Sigma]\>\"", ",", "\"\<s\>\"", ",", 
-     "\"\<\[Alpha]\>\"", ",", "\"\<\[Beta]\>\"", ",", "\"\<MDD\>\""}], 
-    "}"}]}], ";"}], "\n", 
- RowBox[{
-  RowBox[{"stats", "=", 
-   RowBox[{
-    RowBox[{"Dataset", "[", 
-     RowBox[{"AssociationThread", "[", 
-      RowBox[{"columns", "->", "symbols"}], "]"}], "]"}], "//", 
-    "Transpose"}]}], ";"}], "\[IndentingNewLine]", 
- RowBox[{
-  RowBox[{"stats", "=", 
-   RowBox[{
-    RowBox[{
-     RowBox[{"Round", "[", 
-      RowBox[{"#", ",", "0.01"}], "]"}], "&"}], "/@", "stats"}]}], 
-  ";"}], "\[IndentingNewLine]", 
- RowBox[{"stats", "[", 
-  RowBox[{"SortBy", "[", 
-   RowBox[{
-    RowBox[{"-", 
-     RowBox[{"Abs", "@", 
-      RowBox[{"#", "[", "\"\<s\>\"", "]"}]}]}], "&"}], "]"}], "]"}]}], "Input",\
-
+          RowBox[{"EmpiricalDistribution", "@", 
+           RowBox[{"QuantityMagnitude", "@", 
+            RowBox[{"Normal", "@", 
+             RowBox[{"#", "[", "\"\<Values\>\"", "]"}]}]}]}], ",", "0.01"}], 
+         "]"}], "&"}], "/@", "return"}]}], ";", "\[IndentingNewLine]", 
+     RowBox[{"symbols", "=", 
+      RowBox[{"{", 
+       RowBox[{
+       "\[Mu]", ",", "\[Sigma]", ",", "s", ",", "\[Alpha]", ",", "\[Beta]", 
+        ",", "MDD", ",", "VaR"}], "}"}]}], ";", "\[IndentingNewLine]", 
+     RowBox[{"columns", "=", 
+      RowBox[{"{", 
+       RowBox[{
+       "\"\<\[Mu]\>\"", ",", "\"\<\[Sigma]\>\"", ",", "\"\<s\>\"", ",", 
+        "\"\<\[Alpha]\>\"", ",", "\"\<\[Beta]\>\"", ",", "\"\<MDD\>\"", ",", 
+        "\"\<VaR\>\""}], "}"}]}], ";", "\n", 
+     RowBox[{"stats", "=", 
+      RowBox[{
+       RowBox[{"Dataset", "[", 
+        RowBox[{"AssociationThread", "[", 
+         RowBox[{"columns", "->", "symbols"}], "]"}], "]"}], "//", 
+       "Transpose"}]}], ";", "\[IndentingNewLine]", 
+     RowBox[{"stats", "=", 
+      RowBox[{
+       RowBox[{
+        RowBox[{"Round", "[", 
+         RowBox[{"#", ",", "0.001"}], "]"}], "&"}], "/@", "stats"}]}], ";", 
+     "\[IndentingNewLine]", 
+     RowBox[{"stats", "[", 
+      RowBox[{"SortBy", "[", 
+       RowBox[{
+        RowBox[{"-", 
+         RowBox[{"Abs", "@", 
+          RowBox[{"#", "[", "by", "]"}]}]}], "&"}], "]"}], "]"}]}]}], 
+   "]"}]}]], "Input",
  CellChangeTimes->{{3.934077133454311*^9, 3.9340771876134157`*^9}, {
    3.934077448636087*^9, 3.9340774645702467`*^9}, {3.934077631282916*^9, 
    3.934077651392634*^9}, {3.934077935234687*^9, 3.93407793636455*^9}, {
-   3.934077972184854*^9, 3.9340779832191133`*^9}, {3.934078013900763*^9, 
-   3.934078034910877*^9}, {3.934078092172439*^9, 3.9340781405263577`*^9}, {
-   3.9340817597129097`*^9, 3.934081775923348*^9}, {3.93408185927428*^9, 
+   3.934077972184854*^9, 3.934077983219113*^9}, {3.934078013900763*^9, 
+   3.934078034910877*^9}, {3.934078092172439*^9, 3.934078140526358*^9}, {
+   3.93408175971291*^9, 3.934081775923348*^9}, {3.93408185927428*^9, 
    3.93408189050027*^9}, 3.934082160066574*^9, 3.934082197043322*^9, {
    3.934083341331821*^9, 3.934083341674303*^9}, {3.934084761046768*^9, 
-   3.934084770672587*^9}, {3.934084802817582*^9, 3.9340848885795383`*^9}, {
+   3.934084770672587*^9}, {3.934084802817582*^9, 3.934084888579539*^9}, {
    3.934086602604047*^9, 3.934086639449267*^9}, {3.934086749803043*^9, 
    3.93408675936864*^9}, {3.934088366847184*^9, 3.9340883669794188`*^9}, {
-   3.9340884678149023`*^9, 3.9340884683807697`*^9}, {3.9340885032601357`*^9, 
+   3.9340884678149023`*^9, 3.934088468380769*^9}, {3.934088503260135*^9, 
    3.93408850362029*^9}, {3.934089871466786*^9, 3.934089883029523*^9}, {
-   3.9340899980563707`*^9, 3.934089999062311*^9}, {3.93409076995774*^9, 
-   3.9340907915469913`*^9}, {3.9340910621487713`*^9, 3.9340910777829533`*^9}},
- 
- CellLabel->"In[44]:=",ExpressionUUID->"248ab0d9-7efe-4df0-80d6-9845cbb0e07b"],
+   3.934089998056371*^9, 3.934089999062311*^9}, {3.93409076995774*^9, 
+   3.934090791546992*^9}, {3.9340910621487713`*^9, 3.934091077782954*^9}, {
+   3.93409562301399*^9, 3.93409562765034*^9}, {3.934096983690311*^9, 
+   3.934097019214094*^9}, {3.934097141195504*^9, 3.934097190464264*^9}, {
+   3.934097276660686*^9, 3.93409728003011*^9}, {3.9340973245745077`*^9, 
+   3.934097359040573*^9}, {3.934097439090909*^9, 3.93409746315961*^9}, {
+   3.934097495729142*^9, 3.934097502375006*^9}, {3.9340978760746937`*^9, 
+   3.934098007453785*^9}, {3.9340980426350594`*^9, 3.934098099574223*^9}, {
+   3.934098336862864*^9, 3.934098338159659*^9}},
+ CellLabel->"In[38]:=",ExpressionUUID->"248ab0d9-7efe-4df0-80d6-9845cbb0e07b"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"Intersection", "[", 
+  RowBox[{
+   RowBox[{
+    RowBox[{"Keys", "[", 
+     RowBox[{"CAPM", "[", 
+      RowBox[{"close", ",", "return", ",", "\"\<s\>\""}], "]"}], "]"}], "[", 
+    RowBox[{"[", 
+     RowBox[{";;", "15"}], "]"}], "]"}], ",", 
+   RowBox[{
+    RowBox[{"Keys", "[", 
+     RowBox[{"CAPM", "[", 
+      RowBox[{
+       RowBox[{"YTD", "/@", "close"}], ",", 
+       RowBox[{"YTD", "/@", "return"}], ",", "\"\<s\>\""}], "]"}], "]"}], "[", 
+    RowBox[{"[", 
+     RowBox[{";;", "15"}], "]"}], "]"}]}], "]"}]], "Input",
+ CellChangeTimes->{{3.934097343273768*^9, 3.934097369925333*^9}, {
+  3.934097505939214*^9, 3.934097512740163*^9}, {3.9340986749044228`*^9, 
+  3.934098764117115*^9}},
+ CellLabel->"In[48]:=",ExpressionUUID->"2b9be3a9-2591-4421-a1da-c5b964d4dcf2"],
 
 Cell[BoxData[
  TagBox[
   TagBox[
    DynamicModuleBox[{TypeSystem`NestedGrid`PackagePrivate`$state$$ = <|
-    "InitialData" -> <|
-      "NVDA" -> <|
-        "\[Mu]" -> 2.9, "\[Sigma]" -> 0.5700000000000001, "s" -> 
-         5.1000000000000005`, "\[Alpha]" -> 2.21, "\[Beta]" -> 2.71, 
-         "MDD" -> -0.27|>, 
-       "IBKR" -> <|
-        "\[Mu]" -> 0.9, "\[Sigma]" -> 0.24, "s" -> 3.81, "\[Alpha]" -> 0.72, 
-         "\[Beta]" -> 0.6900000000000001, "MDD" -> -0.15|>, 
-       "LLY" -> <|
-        "\[Mu]" -> 1.08, "\[Sigma]" -> 0.31, "s" -> 3.5100000000000002`, 
-         "\[Alpha]" -> 0.87, "\[Beta]" -> 0.81, "MDD" -> -0.19|>, 
-       "KO" -> <|
-        "\[Mu]" -> 0.37, "\[Sigma]" -> 0.12, "s" -> 3.06, "\[Alpha]" -> 0.34, 
-         "\[Beta]" -> 0.09, "MDD" -> -0.05|>, 
-       "TSM" -> <|
-        "\[Mu]" -> 1.22, "\[Sigma]" -> 0.4, "s" -> 3.0300000000000002`, 
-         "\[Alpha]" -> 0.68, "\[Beta]" -> 2.12, "MDD" -> -0.23|>, 
-       "NFLX" -> <|
-        "\[Mu]" -> 0.8300000000000001, "\[Sigma]" -> 0.29, "s" -> 2.84, 
-         "\[Alpha]" -> 0.56, "\[Beta]" -> 1.07, "MDD" -> -0.13|>, 
-       "AXP" -> <|
-        "\[Mu]" -> 0.63, "\[Sigma]" -> 0.23, "s" -> 2.74, "\[Alpha]" -> 0.4, 
-         "\[Beta]" -> 0.93, "MDD" -> -0.11|>, 
-       "JPM" -> <|
-        "\[Mu]" -> 0.53, "\[Sigma]" -> 0.2, "s" -> 2.7, "\[Alpha]" -> 0.36, 
-         "\[Beta]" -> 0.7000000000000001, "MDD" -> -0.1|>, 
-       "OEF" -> <|
-        "\[Mu]" -> 0.36, "\[Sigma]" -> 0.14, "s" -> 2.65, "\[Alpha]" -> 0.1, 
-         "\[Beta]" -> 1.05, "MDD" -> -0.1|>, 
-       "GS" -> <|
-        "\[Mu]" -> 0.55, "\[Sigma]" -> 0.22, "s" -> 2.5500000000000003`, 
-         "\[Alpha]" -> 0.29, "\[Beta]" -> 1.01, "MDD" -> -0.1|>, 
-       "SPY" -> <|
-        "\[Mu]" -> 0.31, "\[Sigma]" -> 0.13, "s" -> 2.52, "\[Alpha]" -> 0.06, 
-         "\[Beta]" -> 1.01, "MDD" -> -0.08|>, 
-       "VTI" -> <|
-        "\[Mu]" -> 0.3, "\[Sigma]" -> 0.13, "s" -> 2.33, "\[Alpha]" -> 0.03, 
-         "\[Beta]" -> 1.04, "MDD" -> -0.09|>, 
-       "SCHG" -> <|
-        "\[Mu]" -> 0.39, "\[Sigma]" -> 0.18, "s" -> 2.21, "\[Alpha]" -> 0.06, 
-         "\[Beta]" -> 1.29, "MDD" -> -0.12|>, 
-       "JEPI" -> <|
-        "\[Mu]" -> 0.16, "\[Sigma]" -> 0.08, "s" -> 2.15, "\[Alpha]" -> 0.03, 
-         "\[Beta]" -> 0.51, "MDD" -> -0.04|>, 
-       "VT" -> <|
-        "\[Mu]" -> 0.25, "\[Sigma]" -> 0.12, "s" -> 2.12, "\[Alpha]" -> 0., 
-         "\[Beta]" -> 1., "MDD" -> -0.08|>, 
-       "META" -> <|
-        "\[Mu]" -> 0.85, "\[Sigma]" -> 0.41000000000000003`, "s" -> 2.08, 
-         "\[Alpha]" -> 0.48, "\[Beta]" -> 1.48, "MDD" -> -0.18|>, 
-       "IBM" -> <|
-        "\[Mu]" -> 0.46, "\[Sigma]" -> 0.24, "s" -> 1.93, "\[Alpha]" -> 0.25, 
-         "\[Beta]" -> 0.8300000000000001, "MDD" -> -0.17|>, 
-       "LIN" -> <|
-        "\[Mu]" -> 0.27, "\[Sigma]" -> 0.14, "s" -> 1.9000000000000001`, 
-         "\[Alpha]" -> 0.16, "\[Beta]" -> 0.44, "MDD" -> -0.12|>, 
-       "AVGO" -> <|
-        "\[Mu]" -> 0.86, "\[Sigma]" -> 0.48, "s" -> 1.81, "\[Alpha]" -> 0.26, 
-         "\[Beta]" -> 2.36, "MDD" -> -0.25|>, 
-       "JEPQ" -> <|
-        "\[Mu]" -> 0.22, "\[Sigma]" -> 0.13, "s" -> 1.69, "\[Alpha]" -> -0.02,
-          "\[Beta]" -> 0.96, "MDD" -> -0.11|>, 
-       "ARM" -> <|
-        "\[Mu]" -> 1.68, "\[Sigma]" -> 1.01, "s" -> 1.6600000000000001`, 
-         "\[Alpha]" -> 0.76, "\[Beta]" -> 3.63, "MDD" -> -0.43|>, 
-       "QQQ" -> <|
-        "\[Mu]" -> 0.29, "\[Sigma]" -> 0.18, "s" -> 1.6300000000000001`, 
-         "\[Alpha]" -> -0.04, "\[Beta]" -> 1.33, "MDD" -> -0.14|>, 
-       "DIA" -> <|
-        "\[Mu]" -> 0.17, "\[Sigma]" -> 0.11, "s" -> 1.6, "\[Alpha]" -> -0.02, 
-         "\[Beta]" -> 0.75, "MDD" -> -0.06|>, 
-       "AAPL" -> <|
-        "\[Mu]" -> 0.38, "\[Sigma]" -> 0.24, "s" -> 1.58, "\[Alpha]" -> 0.13, 
-         "\[Beta]" -> 0.98, "MDD" -> -0.15|>, 
-       "SCHD" -> <|
-        "\[Mu]" -> 0.18, "\[Sigma]" -> 0.11, "s" -> 1.57, "\[Alpha]" -> 0.02, 
-         "\[Beta]" -> 0.63, "MDD" -> -0.06|>, 
-       "BAC" -> <|
-        "\[Mu]" -> 0.34, "\[Sigma]" -> 0.22, "s" -> 1.56, "\[Alpha]" -> 0.13, 
-         "\[Beta]" -> 0.86, "MDD" -> -0.17|>, 
-       "MA" -> <|
-        "\[Mu]" -> 0.23, "\[Sigma]" -> 0.16, "s" -> 1.43, "\[Alpha]" -> 0.07, 
-         "\[Beta]" -> 0.64, "MDD" -> -0.12|>, 
-       "C" -> <|"\[Mu]" -> 0.32, "\[Sigma]" -> 0.25, "s" -> 1.3, "\[Alpha]" -> 
-         0.04, "\[Beta]" -> 1.11, "MDD" -> -0.16|>, 
-       "INTC" -> <|
-        "\[Mu]" -> -0.68, "\[Sigma]" -> 0.53, "s" -> -1.28, 
-         "\[Alpha]" -> -1.25, "\[Beta]" -> 2.2600000000000002`, 
-         "MDD" -> -0.61|>, 
-       "WFC" -> <|
-        "\[Mu]" -> 0.32, "\[Sigma]" -> 0.25, "s" -> 1.28, "\[Alpha]" -> 0.14, 
-         "\[Beta]" -> 0.7000000000000001, "MDD" -> -0.16|>, 
-       "AMZN" -> <|
-        "\[Mu]" -> 0.3, "\[Sigma]" -> 0.28, "s" -> 1.08, "\[Alpha]" -> -0.07, 
-         "\[Beta]" -> 1.47, "MDD" -> -0.19|>, 
-       "GOOG" -> <|
-        "\[Mu]" -> 0.29, "\[Sigma]" -> 0.28, "s" -> 1.05, "\[Alpha]" -> 0., 
-         "\[Beta]" -> 1.1500000000000001`, "MDD" -> -0.17|>, 
-       "MSFT" -> <|
-        "\[Mu]" -> 0.2, "\[Sigma]" -> 0.2, "s" -> 1.03, "\[Alpha]" -> -0.07, 
-         "\[Beta]" -> 1.09, "MDD" -> -0.15|>, 
-       "QCOM" -> <|
-        "\[Mu]" -> 0.42, "\[Sigma]" -> 0.4, "s" -> 1.03, "\[Alpha]" -> -0.14, 
-         "\[Beta]" -> 2.21, "MDD" -> -0.31|>, 
-       "TMO" -> <|
-        "\[Mu]" -> 0.2, "\[Sigma]" -> 0.2, "s" -> 1.01, "\[Alpha]" -> 0.02, 
-         "\[Beta]" -> 0.71, "MDD" -> -0.11|>, 
-       "ASML" -> <|
-        "\[Mu]" -> 0.43, "\[Sigma]" -> 0.44, "s" -> 0.97, "\[Alpha]" -> -0.22,
-          "\[Beta]" -> 2.56, "MDD" -> -0.26|>, 
-       "MS" -> <|
-        "\[Mu]" -> 0.19, "\[Sigma]" -> 0.23, "s" -> 0.84, "\[Alpha]" -> -0.05,
-          "\[Beta]" -> 0.9500000000000001, "MDD" -> -0.13|>, 
-       "IWM" -> <|
-        "\[Mu]" -> 0.16, "\[Sigma]" -> 0.21, "s" -> 0.78, "\[Alpha]" -> -0.19,
-          "\[Beta]" -> 1.3900000000000001`, "MDD" -> -0.1|>, 
-       "V" -> <|"\[Mu]" -> 0.11, "\[Sigma]" -> 0.16, "s" -> 0.72, 
-         "\[Alpha]" -> -0.05, "\[Beta]" -> 0.63, "MDD" -> -0.12|>, 
-       "^HSI" -> <|
-        "\[Mu]" -> 0.11, "\[Sigma]" -> 0.22, "s" -> 0.5, "\[Alpha]" -> -0.04, 
-         "\[Beta]" -> 0.6, "MDD" -> -0.15|>, 
-       "MRK" -> <|
-        "\[Mu]" -> 0.09, "\[Sigma]" -> 0.21, "s" -> 0.42, "\[Alpha]" -> 0.03, 
-         "\[Beta]" -> 0.23, "MDD" -> -0.16|>, 
-       "^000001" -> <|
-        "\[Mu]" -> -0.06, "\[Sigma]" -> 0.15, "s" -> -0.41000000000000003`, 
-         "\[Alpha]" -> -0.12, "\[Beta]" -> 0.22, "MDD" -> -0.11|>, 
-       "COIN" -> <|
-        "\[Mu]" -> 0.26, "\[Sigma]" -> 0.78, "s" -> 0.34, "\[Alpha]" -> -0.45,
-          "\[Beta]" -> 2.8000000000000003`, "MDD" -> -0.36|>, 
-       "TSLA" -> <|
-        "\[Mu]" -> -0.2, "\[Sigma]" -> 0.58, "s" -> -0.34, 
-         "\[Alpha]" -> -0.78, "\[Beta]" -> 2.27, "MDD" -> -0.43|>, 
-       "SCHW" -> <|
-        "\[Mu]" -> -0.07, "\[Sigma]" -> 0.26, "s" -> -0.27, 
-         "\[Alpha]" -> -0.26, "\[Beta]" -> 0.76, "MDD" -> -0.21|>, 
-       "AMD" -> <|
-        "\[Mu]" -> 0.11, "\[Sigma]" -> 0.5, "s" -> 0.22, "\[Alpha]" -> -0.46, 
-         "\[Beta]" -> 2.23, "MDD" -> -0.39|>, 
-       "PEP" -> <|
-        "\[Mu]" -> 0.02, "\[Sigma]" -> 0.17, "s" -> 0.14, "\[Alpha]" -> 0.01, 
-         "\[Beta]" -> 0.04, "MDD" -> -0.11|>, 
-       "MCD" -> <|
-        "\[Mu]" -> -0.02, "\[Sigma]" -> 0.19, "s" -> -0.13, 
-         "\[Alpha]" -> -0.12, "\[Beta]" -> 0.39, "MDD" -> -0.17|>|>, 
+    "InitialData" -> {
+      "AXP", "IBKR", "JEPI", "JPM", "KO", "LLY", "NVDA", "OEF"}, 
      "AllowEmbedding" -> True, "InitialShape" -> 
-     TypeSystem`PackageScope`HeaderShape[<|{All, 
-          TypeSystem`PackageScope`KeyDummy[1]} -> 1, {All, "\[Mu]"} -> 
-        1, {All, "\[Sigma]"} -> 1, {All, "s"} -> 1, {All, "\[Alpha]"} -> 
-        1, {All, "\[Beta]"} -> 1, {All, "MDD"} -> 1|>, 
-       TypeSystem`PackageScope`Limited[
-        TypeSystem`PackageScope`ColumnShape[
-         TypeSystem`PackageScope`KeyValueShape[
-          TypeSystem`PackageScope`AtomShape[44.800000000000004`], 
-          TypeSystem`PackageScope`Limited[
-           
-           TypeSystem`PackageScope`RowShape[<|
-            "\[Mu]" -> TypeSystem`PackageScope`AtomShape[60], "\[Sigma]" -> 
-             TypeSystem`PackageScope`AtomShape[60], "s" -> 
-             TypeSystem`PackageScope`AtomShape[60], "\[Alpha]" -> 
-             TypeSystem`PackageScope`AtomShape[60], "\[Beta]" -> 
-             TypeSystem`PackageScope`AtomShape[60], "MDD" -> 
-             TypeSystem`PackageScope`AtomShape[60]|>], 
-           DirectedInfinity[1], 6, {All}]]], 20, 
-        DirectedInfinity[1], {}]], "InitialType" -> TypeSystem`Assoc[
-       TypeSystem`Atom[String], 
-       TypeSystem`Struct[{
-        "\[Mu]", "\[Sigma]", "s", "\[Alpha]", "\[Beta]", "MDD"}, {
-         TypeSystem`Atom[Real], 
-         TypeSystem`Atom[Real], 
-         TypeSystem`Atom[Real], 
-         TypeSystem`Atom[Real], 
-         TypeSystem`Atom[Real], 
-         TypeSystem`Atom[Real]}], 48], "Meta" -> <||>, "RowTarget" -> 20, 
-     "ColumnTarget" -> 10, "Shape" -> 
-     TypeSystem`PackageScope`HeaderShape[<|{All, 
-          TypeSystem`PackageScope`KeyDummy[1]} -> 1, {All, "\[Mu]"} -> 
-        1, {All, "\[Sigma]"} -> 1, {All, "s"} -> 1, {All, "\[Alpha]"} -> 
-        1, {All, "\[Beta]"} -> 1, {All, "MDD"} -> 1|>, 
-       TypeSystem`PackageScope`Limited[
-        TypeSystem`PackageScope`ColumnShape[
-         TypeSystem`PackageScope`KeyValueShape[
-          TypeSystem`PackageScope`AtomShape[44.800000000000004`], 
-          TypeSystem`PackageScope`Limited[
-           
-           TypeSystem`PackageScope`RowShape[<|
-            "\[Mu]" -> TypeSystem`PackageScope`AtomShape[60], "\[Sigma]" -> 
-             TypeSystem`PackageScope`AtomShape[60], "s" -> 
-             TypeSystem`PackageScope`AtomShape[60], "\[Alpha]" -> 
-             TypeSystem`PackageScope`AtomShape[60], "\[Beta]" -> 
-             TypeSystem`PackageScope`AtomShape[60], "MDD" -> 
-             TypeSystem`PackageScope`AtomShape[60]|>], 
-           DirectedInfinity[1], 6, {All}]]], 20, 
-        DirectedInfinity[1], {}]], "Type" -> TypeSystem`Assoc[
-       TypeSystem`Atom[String], 
-       TypeSystem`Struct[{
-        "\[Mu]", "\[Sigma]", "s", "\[Alpha]", "\[Beta]", "MDD"}, {
-         TypeSystem`Atom[Real], 
-         TypeSystem`Atom[Real], 
-         TypeSystem`Atom[Real], 
-         TypeSystem`Atom[Real], 
-         TypeSystem`Atom[Real], 
-         TypeSystem`Atom[Real]}], 48], "Path" -> {}, "DisplayedRowCount" -> 
-     20, "DisplayedColumnCount" -> 6, "DataRowCount" -> 48, "DataColumnCount" -> 
-     6, "SortPaths" -> {}, "SortDirections" -> {}, "HiddenItemsMap" -> Null, 
+     TypeSystem`PackageScope`Limited[
+       TypeSystem`PackageScope`ColumnShape[
+        TypeSystem`PackageScope`AtomShape[44.800000000000004`]], 8, 
+       DirectedInfinity[1], {}], "InitialType" -> TypeSystem`Vector[
+       TypeSystem`Atom[String], 8], "Meta" -> <||>, "RowTarget" -> 20, 
+     "ColumnTarget" -> 10, "Shape" -> TypeSystem`PackageScope`Limited[
+       TypeSystem`PackageScope`ColumnShape[
+        TypeSystem`PackageScope`AtomShape[44.800000000000004`]], 8, 
+       DirectedInfinity[1], {}], "Type" -> TypeSystem`Vector[
+       TypeSystem`Atom[String], 8], "Path" -> {}, "DisplayedRowCount" -> 8, 
+     "DisplayedColumnCount" -> 1, "DataRowCount" -> 8, "DataColumnCount" -> 1,
+      "SortPaths" -> {}, "SortDirections" -> {}, "HiddenItemsMap" -> Null, 
      "UpdateType" -> 1|>, TypeSystem`NestedGrid`PackagePrivate`$outputID$$, 
     TypeSystem`NestedGrid`PackagePrivate`$path$$ = {}, 
     TypeSystem`NestedGrid`PackagePrivate`$vPos$$ = 1, 
@@ -546,2564 +397,84 @@ Cell[BoxData[
          Grid[{{
             Item[
              Pane[
-              Annotation[
-               Mouseover[
-                
-                Graphics[{}, ImageSize -> 6, BaselinePosition -> 
-                 Scaled[-0.15]], 
-                Graphics[{
-                  GrayLevel[0.6], 
-                  
-                  Polygon[{{2^Rational[-1, 2], -2^Rational[-1, 2]}, {
-                    2^Rational[-1, 2], 2^
-                    Rational[-1, 2]}, {-2^Rational[-1, 2], 2^
-                    Rational[-1, 2]}, {-2^Rational[-1, 2], -2^
-                    Rational[-1, 2]}}]}, ImageSize -> 6, BaselinePosition -> 
-                 Scaled[-0.15]]], 
+              Annotation["AXP", 
                TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[
                 TypeSystem`NestedGrid`PackagePrivate`localHold[
-                TypeSystem`NestedGrid`PackagePrivate`$outputID$$]][{
-                All, Keys}, "KeyDummy", True], "Mouse"], 
-              ImageSize -> {{1, Full}, Automatic}, 
-              ImageMargins -> {{5, 3}, {4, 5}}], Background -> 
-             GrayLevel[0.95], Alignment -> {Left, Baseline}], 
-            Item[
-             Pane[
-              Annotation[
-               EventHandler[
-                MouseAppearance[
-                 Mouseover["\[Mu]", 
-                  Style[
-                  "\[Mu]", FontColor -> 
-                   RGBColor[
-                    0.27450980392156865`, 0.5372549019607843, 
-                    0.792156862745098]]], "LinkHand"], {"MouseClicked", 1} :> 
-                If[
-                  TypeSystem`NestedGrid`PackagePrivate`checkInteractivity[
-                  TypeSystem`NestedGrid`PackagePrivate`$state$$], 
-                  TypeSystem`NestedGrid`PackagePrivate`updateState[
-                  TypeSystem`NestedGrid`PackagePrivate`$state$$, 
-                   TypeSystem`NestedGrid`PackagePrivate`$path$$, 
-                   TypeSystem`NestedGrid`PackagePrivate`$vPos$$, 
-                   TypeSystem`NestedGrid`PackagePrivate`$hPos$$, 
-                   TypeSystem`NestedGrid`PackagePrivate`$grid$$, 
-                   TypeSystem`NestedGrid`PackagePrivate`localHold[
-                    TypeSystem`NestedGrid`PackagePrivate`localHold[
-                    TypeSystem`NestedGrid`PackagePrivate`$outputID$$]]][{
-                   All, "\[Mu]"}, 1]]], 
-               TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[
-                TypeSystem`NestedGrid`PackagePrivate`localHold[
-                TypeSystem`NestedGrid`PackagePrivate`$outputID$$]][{
-                All, "\[Mu]"}, "ColumnHeader", True], "Mouse"], 
-              ImageSize -> {{1, Full}, Automatic}, 
-              ImageMargins -> {{5, 3}, {4, 5}}], Background -> 
-             GrayLevel[0.95], Alignment -> {Left, Baseline}], 
-            Item[
-             Pane[
-              Annotation[
-               EventHandler[
-                MouseAppearance[
-                 Mouseover["\[Sigma]", 
-                  Style[
-                  "\[Sigma]", FontColor -> 
-                   RGBColor[
-                    0.27450980392156865`, 0.5372549019607843, 
-                    0.792156862745098]]], "LinkHand"], {"MouseClicked", 1} :> 
-                If[
-                  TypeSystem`NestedGrid`PackagePrivate`checkInteractivity[
-                  TypeSystem`NestedGrid`PackagePrivate`$state$$], 
-                  TypeSystem`NestedGrid`PackagePrivate`updateState[
-                  TypeSystem`NestedGrid`PackagePrivate`$state$$, 
-                   TypeSystem`NestedGrid`PackagePrivate`$path$$, 
-                   TypeSystem`NestedGrid`PackagePrivate`$vPos$$, 
-                   TypeSystem`NestedGrid`PackagePrivate`$hPos$$, 
-                   TypeSystem`NestedGrid`PackagePrivate`$grid$$, 
-                   TypeSystem`NestedGrid`PackagePrivate`localHold[
-                    TypeSystem`NestedGrid`PackagePrivate`localHold[
-                    TypeSystem`NestedGrid`PackagePrivate`$outputID$$]]][{
-                   All, "\[Sigma]"}, 1]]], 
-               TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[
-                TypeSystem`NestedGrid`PackagePrivate`localHold[
-                TypeSystem`NestedGrid`PackagePrivate`$outputID$$]][{
-                All, "\[Sigma]"}, "ColumnHeader", True], "Mouse"], 
-              ImageSize -> {{1, Full}, Automatic}, 
-              ImageMargins -> {{5, 3}, {4, 5}}], Background -> 
-             GrayLevel[0.95], Alignment -> {Left, Baseline}], 
-            Item[
-             Pane[
-              Annotation[
-               EventHandler[
-                MouseAppearance[
-                 Mouseover["s", 
-                  Style[
-                  "s", FontColor -> 
-                   RGBColor[
-                    0.27450980392156865`, 0.5372549019607843, 
-                    0.792156862745098]]], "LinkHand"], {"MouseClicked", 1} :> 
-                If[
-                  TypeSystem`NestedGrid`PackagePrivate`checkInteractivity[
-                  TypeSystem`NestedGrid`PackagePrivate`$state$$], 
-                  TypeSystem`NestedGrid`PackagePrivate`updateState[
-                  TypeSystem`NestedGrid`PackagePrivate`$state$$, 
-                   TypeSystem`NestedGrid`PackagePrivate`$path$$, 
-                   TypeSystem`NestedGrid`PackagePrivate`$vPos$$, 
-                   TypeSystem`NestedGrid`PackagePrivate`$hPos$$, 
-                   TypeSystem`NestedGrid`PackagePrivate`$grid$$, 
-                   TypeSystem`NestedGrid`PackagePrivate`localHold[
-                    TypeSystem`NestedGrid`PackagePrivate`localHold[
-                    TypeSystem`NestedGrid`PackagePrivate`$outputID$$]]][{
-                   All, "s"}, 1]]], 
-               TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[
-                TypeSystem`NestedGrid`PackagePrivate`localHold[
-                TypeSystem`NestedGrid`PackagePrivate`$outputID$$]][{All, "s"},
-                 "ColumnHeader", True], "Mouse"], 
-              ImageSize -> {{1, Full}, Automatic}, 
-              ImageMargins -> {{5, 3}, {4, 5}}], Background -> 
-             GrayLevel[0.95], Alignment -> {Left, Baseline}], 
-            Item[
-             Pane[
-              Annotation[
-               EventHandler[
-                MouseAppearance[
-                 Mouseover["\[Alpha]", 
-                  Style[
-                  "\[Alpha]", FontColor -> 
-                   RGBColor[
-                    0.27450980392156865`, 0.5372549019607843, 
-                    0.792156862745098]]], "LinkHand"], {"MouseClicked", 1} :> 
-                If[
-                  TypeSystem`NestedGrid`PackagePrivate`checkInteractivity[
-                  TypeSystem`NestedGrid`PackagePrivate`$state$$], 
-                  TypeSystem`NestedGrid`PackagePrivate`updateState[
-                  TypeSystem`NestedGrid`PackagePrivate`$state$$, 
-                   TypeSystem`NestedGrid`PackagePrivate`$path$$, 
-                   TypeSystem`NestedGrid`PackagePrivate`$vPos$$, 
-                   TypeSystem`NestedGrid`PackagePrivate`$hPos$$, 
-                   TypeSystem`NestedGrid`PackagePrivate`$grid$$, 
-                   TypeSystem`NestedGrid`PackagePrivate`localHold[
-                    TypeSystem`NestedGrid`PackagePrivate`localHold[
-                    TypeSystem`NestedGrid`PackagePrivate`$outputID$$]]][{
-                   All, "\[Alpha]"}, 1]]], 
-               TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[
-                TypeSystem`NestedGrid`PackagePrivate`localHold[
-                TypeSystem`NestedGrid`PackagePrivate`$outputID$$]][{
-                All, "\[Alpha]"}, "ColumnHeader", True], "Mouse"], 
-              ImageSize -> {{1, Full}, Automatic}, 
-              ImageMargins -> {{5, 3}, {4, 5}}], Background -> 
-             GrayLevel[0.95], Alignment -> {Left, Baseline}], 
-            Item[
-             Pane[
-              Annotation[
-               EventHandler[
-                MouseAppearance[
-                 Mouseover["\[Beta]", 
-                  Style[
-                  "\[Beta]", FontColor -> 
-                   RGBColor[
-                    0.27450980392156865`, 0.5372549019607843, 
-                    0.792156862745098]]], "LinkHand"], {"MouseClicked", 1} :> 
-                If[
-                  TypeSystem`NestedGrid`PackagePrivate`checkInteractivity[
-                  TypeSystem`NestedGrid`PackagePrivate`$state$$], 
-                  TypeSystem`NestedGrid`PackagePrivate`updateState[
-                  TypeSystem`NestedGrid`PackagePrivate`$state$$, 
-                   TypeSystem`NestedGrid`PackagePrivate`$path$$, 
-                   TypeSystem`NestedGrid`PackagePrivate`$vPos$$, 
-                   TypeSystem`NestedGrid`PackagePrivate`$hPos$$, 
-                   TypeSystem`NestedGrid`PackagePrivate`$grid$$, 
-                   TypeSystem`NestedGrid`PackagePrivate`localHold[
-                    TypeSystem`NestedGrid`PackagePrivate`localHold[
-                    TypeSystem`NestedGrid`PackagePrivate`$outputID$$]]][{
-                   All, "\[Beta]"}, 1]]], 
-               TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[
-                TypeSystem`NestedGrid`PackagePrivate`localHold[
-                TypeSystem`NestedGrid`PackagePrivate`$outputID$$]][{
-                All, "\[Beta]"}, "ColumnHeader", True], "Mouse"], 
-              ImageSize -> {{1, Full}, Automatic}, 
-              ImageMargins -> {{5, 3}, {4, 5}}], Background -> 
-             GrayLevel[0.95], Alignment -> {Left, Baseline}], 
-            Item[
-             Pane[
-              Annotation[
-               EventHandler[
-                MouseAppearance[
-                 Mouseover["MDD", 
-                  Style[
-                  "MDD", FontColor -> 
-                   RGBColor[
-                    0.27450980392156865`, 0.5372549019607843, 
-                    0.792156862745098]]], "LinkHand"], {"MouseClicked", 1} :> 
-                If[
-                  TypeSystem`NestedGrid`PackagePrivate`checkInteractivity[
-                  TypeSystem`NestedGrid`PackagePrivate`$state$$], 
-                  TypeSystem`NestedGrid`PackagePrivate`updateState[
-                  TypeSystem`NestedGrid`PackagePrivate`$state$$, 
-                   TypeSystem`NestedGrid`PackagePrivate`$path$$, 
-                   TypeSystem`NestedGrid`PackagePrivate`$vPos$$, 
-                   TypeSystem`NestedGrid`PackagePrivate`$hPos$$, 
-                   TypeSystem`NestedGrid`PackagePrivate`$grid$$, 
-                   TypeSystem`NestedGrid`PackagePrivate`localHold[
-                    TypeSystem`NestedGrid`PackagePrivate`localHold[
-                    TypeSystem`NestedGrid`PackagePrivate`$outputID$$]]][{
-                   All, "MDD"}, 1]]], 
-               TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[
-                TypeSystem`NestedGrid`PackagePrivate`localHold[
-                TypeSystem`NestedGrid`PackagePrivate`$outputID$$]][{
-                All, "MDD"}, "ColumnHeader", True], "Mouse"], 
-              ImageSize -> {{1, Full}, Automatic}, 
-              ImageMargins -> {{5, 3}, {4, 5}}], Background -> 
-             GrayLevel[0.95], Alignment -> {Left, Baseline}]}, {
-            Item[
-             Pane[
-              Annotation[
-               EventHandler[
-                MouseAppearance[
-                 Mouseover["NVDA", 
-                  Style[
-                  "NVDA", FontColor -> 
-                   RGBColor[
-                    0.27450980392156865`, 0.5372549019607843, 
-                    0.792156862745098]]], "LinkHand"], {"MouseClicked", 1} :> 
-                If[
-                  TypeSystem`NestedGrid`PackagePrivate`checkInteractivity[
-                  TypeSystem`NestedGrid`PackagePrivate`$state$$], 
-                  TypeSystem`NestedGrid`PackagePrivate`updateState[
-                  TypeSystem`NestedGrid`PackagePrivate`$state$$, 
-                   TypeSystem`NestedGrid`PackagePrivate`$path$$, 
-                   TypeSystem`NestedGrid`PackagePrivate`$vPos$$, 
-                   TypeSystem`NestedGrid`PackagePrivate`$hPos$$, 
-                   TypeSystem`NestedGrid`PackagePrivate`$grid$$, 
-                   TypeSystem`NestedGrid`PackagePrivate`localHold[
-                    TypeSystem`NestedGrid`PackagePrivate`localHold[
-                    TypeSystem`NestedGrid`PackagePrivate`$outputID$$]]][{
-                    Key["NVDA"]}, 1]]], 
-               TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[
-                TypeSystem`NestedGrid`PackagePrivate`localHold[
-                TypeSystem`NestedGrid`PackagePrivate`$outputID$$]][{
-                 Key["NVDA"]}, "RowHeader", False], "Mouse"], 
+                TypeSystem`NestedGrid`PackagePrivate`$outputID$$]][{1}, 
+                "Item", False], "Mouse"], 
               ImageSize -> {{44.800000000000004`, Full}, Automatic}, 
-              ImageMargins -> {{5, 3}, {4, 5}}], Background -> 
-             GrayLevel[0.95], Alignment -> {Left, Baseline}], 
-            Item[
-             Pane[
-              Annotation[
-               RawBoxes["2.9"], 
-               TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[
-                TypeSystem`NestedGrid`PackagePrivate`localHold[
-                TypeSystem`NestedGrid`PackagePrivate`$outputID$$]][{
-                 Key["NVDA"], 
-                 Key["\[Mu]"]}, "Item", False], "Mouse"], 
-              ImageSize -> {{60, Full}, Automatic}, 
-              ImageMargins -> {{5, 3}, {4, 5}}], 
-             ItemSize -> {Full, Automatic}], 
-            Item[
-             Pane[
-              Annotation[
-               RawBoxes["0.57"], 
-               TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[
-                TypeSystem`NestedGrid`PackagePrivate`localHold[
-                TypeSystem`NestedGrid`PackagePrivate`$outputID$$]][{
-                 Key["NVDA"], 
-                 Key["\[Sigma]"]}, "Item", False], "Mouse"], 
-              ImageSize -> {{60, Full}, Automatic}, 
-              ImageMargins -> {{5, 3}, {4, 5}}], 
-             ItemSize -> {Full, Automatic}], 
-            Item[
-             Pane[
-              Annotation[
-               RawBoxes["5.1"], 
-               TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[
-                TypeSystem`NestedGrid`PackagePrivate`localHold[
-                TypeSystem`NestedGrid`PackagePrivate`$outputID$$]][{
-                 Key["NVDA"], 
-                 Key["s"]}, "Item", False], "Mouse"], 
-              ImageSize -> {{60, Full}, Automatic}, 
-              ImageMargins -> {{5, 3}, {4, 5}}], 
-             ItemSize -> {Full, Automatic}], 
-            Item[
-             Pane[
-              Annotation[
-               RawBoxes["2.21"], 
-               TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[
-                TypeSystem`NestedGrid`PackagePrivate`localHold[
-                TypeSystem`NestedGrid`PackagePrivate`$outputID$$]][{
-                 Key["NVDA"], 
-                 Key["\[Alpha]"]}, "Item", False], "Mouse"], 
-              ImageSize -> {{60, Full}, Automatic}, 
-              ImageMargins -> {{5, 3}, {4, 5}}], 
-             ItemSize -> {Full, Automatic}], 
-            Item[
-             Pane[
-              Annotation[
-               RawBoxes["2.71"], 
-               TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[
-                TypeSystem`NestedGrid`PackagePrivate`localHold[
-                TypeSystem`NestedGrid`PackagePrivate`$outputID$$]][{
-                 Key["NVDA"], 
-                 Key["\[Beta]"]}, "Item", False], "Mouse"], 
-              ImageSize -> {{60, Full}, Automatic}, 
-              ImageMargins -> {{5, 3}, {4, 5}}], 
-             ItemSize -> {Full, Automatic}], 
-            Item[
-             Pane[
-              Annotation[
-               RawBoxes["-0.27"], 
-               TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[
-                TypeSystem`NestedGrid`PackagePrivate`localHold[
-                TypeSystem`NestedGrid`PackagePrivate`$outputID$$]][{
-                 Key["NVDA"], 
-                 Key["MDD"]}, "Item", False], "Mouse"], 
-              ImageSize -> {{60, Full}, Automatic}, 
               ImageMargins -> {{5, 3}, {4, 5}}], 
              ItemSize -> {Full, Automatic}]}, {
             Item[
              Pane[
-              Annotation[
-               EventHandler[
-                MouseAppearance[
-                 Mouseover["IBKR", 
-                  Style[
-                  "IBKR", FontColor -> 
-                   RGBColor[
-                    0.27450980392156865`, 0.5372549019607843, 
-                    0.792156862745098]]], "LinkHand"], {"MouseClicked", 1} :> 
-                If[
-                  TypeSystem`NestedGrid`PackagePrivate`checkInteractivity[
-                  TypeSystem`NestedGrid`PackagePrivate`$state$$], 
-                  TypeSystem`NestedGrid`PackagePrivate`updateState[
-                  TypeSystem`NestedGrid`PackagePrivate`$state$$, 
-                   TypeSystem`NestedGrid`PackagePrivate`$path$$, 
-                   TypeSystem`NestedGrid`PackagePrivate`$vPos$$, 
-                   TypeSystem`NestedGrid`PackagePrivate`$hPos$$, 
-                   TypeSystem`NestedGrid`PackagePrivate`$grid$$, 
-                   TypeSystem`NestedGrid`PackagePrivate`localHold[
-                    TypeSystem`NestedGrid`PackagePrivate`localHold[
-                    TypeSystem`NestedGrid`PackagePrivate`$outputID$$]]][{
-                    Key["IBKR"]}, 1]]], 
+              Annotation["IBKR", 
                TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[
                 TypeSystem`NestedGrid`PackagePrivate`localHold[
-                TypeSystem`NestedGrid`PackagePrivate`$outputID$$]][{
-                 Key["IBKR"]}, "RowHeader", False], "Mouse"], 
+                TypeSystem`NestedGrid`PackagePrivate`$outputID$$]][{2}, 
+                "Item", False], "Mouse"], 
               ImageSize -> {{44.800000000000004`, Full}, Automatic}, 
-              ImageMargins -> {{5, 3}, {4, 5}}], Background -> 
-             GrayLevel[0.95], Alignment -> {Left, Baseline}], 
-            Item[
-             Pane[
-              Annotation[
-               RawBoxes["0.9"], 
-               TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[
-                TypeSystem`NestedGrid`PackagePrivate`localHold[
-                TypeSystem`NestedGrid`PackagePrivate`$outputID$$]][{
-                 Key["IBKR"], 
-                 Key["\[Mu]"]}, "Item", False], "Mouse"], 
-              ImageSize -> {{60, Full}, Automatic}, 
-              ImageMargins -> {{5, 3}, {4, 5}}], 
-             ItemSize -> {Full, Automatic}], 
-            Item[
-             Pane[
-              Annotation[
-               RawBoxes["0.24"], 
-               TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[
-                TypeSystem`NestedGrid`PackagePrivate`localHold[
-                TypeSystem`NestedGrid`PackagePrivate`$outputID$$]][{
-                 Key["IBKR"], 
-                 Key["\[Sigma]"]}, "Item", False], "Mouse"], 
-              ImageSize -> {{60, Full}, Automatic}, 
-              ImageMargins -> {{5, 3}, {4, 5}}], 
-             ItemSize -> {Full, Automatic}], 
-            Item[
-             Pane[
-              Annotation[
-               RawBoxes["3.81"], 
-               TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[
-                TypeSystem`NestedGrid`PackagePrivate`localHold[
-                TypeSystem`NestedGrid`PackagePrivate`$outputID$$]][{
-                 Key["IBKR"], 
-                 Key["s"]}, "Item", False], "Mouse"], 
-              ImageSize -> {{60, Full}, Automatic}, 
-              ImageMargins -> {{5, 3}, {4, 5}}], 
-             ItemSize -> {Full, Automatic}], 
-            Item[
-             Pane[
-              Annotation[
-               RawBoxes["0.72"], 
-               TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[
-                TypeSystem`NestedGrid`PackagePrivate`localHold[
-                TypeSystem`NestedGrid`PackagePrivate`$outputID$$]][{
-                 Key["IBKR"], 
-                 Key["\[Alpha]"]}, "Item", False], "Mouse"], 
-              ImageSize -> {{60, Full}, Automatic}, 
-              ImageMargins -> {{5, 3}, {4, 5}}], 
-             ItemSize -> {Full, Automatic}], 
-            Item[
-             Pane[
-              Annotation[
-               RawBoxes["0.69"], 
-               TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[
-                TypeSystem`NestedGrid`PackagePrivate`localHold[
-                TypeSystem`NestedGrid`PackagePrivate`$outputID$$]][{
-                 Key["IBKR"], 
-                 Key["\[Beta]"]}, "Item", False], "Mouse"], 
-              ImageSize -> {{60, Full}, Automatic}, 
-              ImageMargins -> {{5, 3}, {4, 5}}], 
-             ItemSize -> {Full, Automatic}], 
-            Item[
-             Pane[
-              Annotation[
-               RawBoxes["-0.15"], 
-               TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[
-                TypeSystem`NestedGrid`PackagePrivate`localHold[
-                TypeSystem`NestedGrid`PackagePrivate`$outputID$$]][{
-                 Key["IBKR"], 
-                 Key["MDD"]}, "Item", False], "Mouse"], 
-              ImageSize -> {{60, Full}, Automatic}, 
               ImageMargins -> {{5, 3}, {4, 5}}], 
              ItemSize -> {Full, Automatic}]}, {
             Item[
              Pane[
-              Annotation[
-               EventHandler[
-                MouseAppearance[
-                 Mouseover["LLY", 
-                  Style[
-                  "LLY", FontColor -> 
-                   RGBColor[
-                    0.27450980392156865`, 0.5372549019607843, 
-                    0.792156862745098]]], "LinkHand"], {"MouseClicked", 1} :> 
-                If[
-                  TypeSystem`NestedGrid`PackagePrivate`checkInteractivity[
-                  TypeSystem`NestedGrid`PackagePrivate`$state$$], 
-                  TypeSystem`NestedGrid`PackagePrivate`updateState[
-                  TypeSystem`NestedGrid`PackagePrivate`$state$$, 
-                   TypeSystem`NestedGrid`PackagePrivate`$path$$, 
-                   TypeSystem`NestedGrid`PackagePrivate`$vPos$$, 
-                   TypeSystem`NestedGrid`PackagePrivate`$hPos$$, 
-                   TypeSystem`NestedGrid`PackagePrivate`$grid$$, 
-                   TypeSystem`NestedGrid`PackagePrivate`localHold[
-                    TypeSystem`NestedGrid`PackagePrivate`localHold[
-                    TypeSystem`NestedGrid`PackagePrivate`$outputID$$]]][{
-                    Key["LLY"]}, 1]]], 
+              Annotation["JEPI", 
                TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[
                 TypeSystem`NestedGrid`PackagePrivate`localHold[
-                TypeSystem`NestedGrid`PackagePrivate`$outputID$$]][{
-                 Key["LLY"]}, "RowHeader", False], "Mouse"], 
+                TypeSystem`NestedGrid`PackagePrivate`$outputID$$]][{3}, 
+                "Item", False], "Mouse"], 
               ImageSize -> {{44.800000000000004`, Full}, Automatic}, 
-              ImageMargins -> {{5, 3}, {4, 5}}], Background -> 
-             GrayLevel[0.95], Alignment -> {Left, Baseline}], 
-            Item[
-             Pane[
-              Annotation[
-               RawBoxes["1.08"], 
-               TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[
-                TypeSystem`NestedGrid`PackagePrivate`localHold[
-                TypeSystem`NestedGrid`PackagePrivate`$outputID$$]][{
-                 Key["LLY"], 
-                 Key["\[Mu]"]}, "Item", False], "Mouse"], 
-              ImageSize -> {{60, Full}, Automatic}, 
-              ImageMargins -> {{5, 3}, {4, 5}}], 
-             ItemSize -> {Full, Automatic}], 
-            Item[
-             Pane[
-              Annotation[
-               RawBoxes["0.31"], 
-               TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[
-                TypeSystem`NestedGrid`PackagePrivate`localHold[
-                TypeSystem`NestedGrid`PackagePrivate`$outputID$$]][{
-                 Key["LLY"], 
-                 Key["\[Sigma]"]}, "Item", False], "Mouse"], 
-              ImageSize -> {{60, Full}, Automatic}, 
-              ImageMargins -> {{5, 3}, {4, 5}}], 
-             ItemSize -> {Full, Automatic}], 
-            Item[
-             Pane[
-              Annotation[
-               RawBoxes["3.51"], 
-               TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[
-                TypeSystem`NestedGrid`PackagePrivate`localHold[
-                TypeSystem`NestedGrid`PackagePrivate`$outputID$$]][{
-                 Key["LLY"], 
-                 Key["s"]}, "Item", False], "Mouse"], 
-              ImageSize -> {{60, Full}, Automatic}, 
-              ImageMargins -> {{5, 3}, {4, 5}}], 
-             ItemSize -> {Full, Automatic}], 
-            Item[
-             Pane[
-              Annotation[
-               RawBoxes["0.87"], 
-               TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[
-                TypeSystem`NestedGrid`PackagePrivate`localHold[
-                TypeSystem`NestedGrid`PackagePrivate`$outputID$$]][{
-                 Key["LLY"], 
-                 Key["\[Alpha]"]}, "Item", False], "Mouse"], 
-              ImageSize -> {{60, Full}, Automatic}, 
-              ImageMargins -> {{5, 3}, {4, 5}}], 
-             ItemSize -> {Full, Automatic}], 
-            Item[
-             Pane[
-              Annotation[
-               RawBoxes["0.81"], 
-               TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[
-                TypeSystem`NestedGrid`PackagePrivate`localHold[
-                TypeSystem`NestedGrid`PackagePrivate`$outputID$$]][{
-                 Key["LLY"], 
-                 Key["\[Beta]"]}, "Item", False], "Mouse"], 
-              ImageSize -> {{60, Full}, Automatic}, 
-              ImageMargins -> {{5, 3}, {4, 5}}], 
-             ItemSize -> {Full, Automatic}], 
-            Item[
-             Pane[
-              Annotation[
-               RawBoxes["-0.19"], 
-               TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[
-                TypeSystem`NestedGrid`PackagePrivate`localHold[
-                TypeSystem`NestedGrid`PackagePrivate`$outputID$$]][{
-                 Key["LLY"], 
-                 Key["MDD"]}, "Item", False], "Mouse"], 
-              ImageSize -> {{60, Full}, Automatic}, 
               ImageMargins -> {{5, 3}, {4, 5}}], 
              ItemSize -> {Full, Automatic}]}, {
             Item[
              Pane[
-              Annotation[
-               EventHandler[
-                MouseAppearance[
-                 Mouseover["KO", 
-                  Style[
-                  "KO", FontColor -> 
-                   RGBColor[
-                    0.27450980392156865`, 0.5372549019607843, 
-                    0.792156862745098]]], "LinkHand"], {"MouseClicked", 1} :> 
-                If[
-                  TypeSystem`NestedGrid`PackagePrivate`checkInteractivity[
-                  TypeSystem`NestedGrid`PackagePrivate`$state$$], 
-                  TypeSystem`NestedGrid`PackagePrivate`updateState[
-                  TypeSystem`NestedGrid`PackagePrivate`$state$$, 
-                   TypeSystem`NestedGrid`PackagePrivate`$path$$, 
-                   TypeSystem`NestedGrid`PackagePrivate`$vPos$$, 
-                   TypeSystem`NestedGrid`PackagePrivate`$hPos$$, 
-                   TypeSystem`NestedGrid`PackagePrivate`$grid$$, 
-                   TypeSystem`NestedGrid`PackagePrivate`localHold[
-                    TypeSystem`NestedGrid`PackagePrivate`localHold[
-                    TypeSystem`NestedGrid`PackagePrivate`$outputID$$]]][{
-                    Key["KO"]}, 1]]], 
+              Annotation["JPM", 
                TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[
                 TypeSystem`NestedGrid`PackagePrivate`localHold[
-                TypeSystem`NestedGrid`PackagePrivate`$outputID$$]][{
-                 Key["KO"]}, "RowHeader", False], "Mouse"], 
+                TypeSystem`NestedGrid`PackagePrivate`$outputID$$]][{4}, 
+                "Item", False], "Mouse"], 
               ImageSize -> {{44.800000000000004`, Full}, Automatic}, 
-              ImageMargins -> {{5, 3}, {4, 5}}], Background -> 
-             GrayLevel[0.95], Alignment -> {Left, Baseline}], 
-            Item[
-             Pane[
-              Annotation[
-               RawBoxes["0.37"], 
-               TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[
-                TypeSystem`NestedGrid`PackagePrivate`localHold[
-                TypeSystem`NestedGrid`PackagePrivate`$outputID$$]][{
-                 Key["KO"], 
-                 Key["\[Mu]"]}, "Item", False], "Mouse"], 
-              ImageSize -> {{60, Full}, Automatic}, 
-              ImageMargins -> {{5, 3}, {4, 5}}], 
-             ItemSize -> {Full, Automatic}], 
-            Item[
-             Pane[
-              Annotation[
-               RawBoxes["0.12"], 
-               TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[
-                TypeSystem`NestedGrid`PackagePrivate`localHold[
-                TypeSystem`NestedGrid`PackagePrivate`$outputID$$]][{
-                 Key["KO"], 
-                 Key["\[Sigma]"]}, "Item", False], "Mouse"], 
-              ImageSize -> {{60, Full}, Automatic}, 
-              ImageMargins -> {{5, 3}, {4, 5}}], 
-             ItemSize -> {Full, Automatic}], 
-            Item[
-             Pane[
-              Annotation[
-               RawBoxes["3.06"], 
-               TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[
-                TypeSystem`NestedGrid`PackagePrivate`localHold[
-                TypeSystem`NestedGrid`PackagePrivate`$outputID$$]][{
-                 Key["KO"], 
-                 Key["s"]}, "Item", False], "Mouse"], 
-              ImageSize -> {{60, Full}, Automatic}, 
-              ImageMargins -> {{5, 3}, {4, 5}}], 
-             ItemSize -> {Full, Automatic}], 
-            Item[
-             Pane[
-              Annotation[
-               RawBoxes["0.34"], 
-               TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[
-                TypeSystem`NestedGrid`PackagePrivate`localHold[
-                TypeSystem`NestedGrid`PackagePrivate`$outputID$$]][{
-                 Key["KO"], 
-                 Key["\[Alpha]"]}, "Item", False], "Mouse"], 
-              ImageSize -> {{60, Full}, Automatic}, 
-              ImageMargins -> {{5, 3}, {4, 5}}], 
-             ItemSize -> {Full, Automatic}], 
-            Item[
-             Pane[
-              Annotation[
-               RawBoxes["0.09"], 
-               TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[
-                TypeSystem`NestedGrid`PackagePrivate`localHold[
-                TypeSystem`NestedGrid`PackagePrivate`$outputID$$]][{
-                 Key["KO"], 
-                 Key["\[Beta]"]}, "Item", False], "Mouse"], 
-              ImageSize -> {{60, Full}, Automatic}, 
-              ImageMargins -> {{5, 3}, {4, 5}}], 
-             ItemSize -> {Full, Automatic}], 
-            Item[
-             Pane[
-              Annotation[
-               RawBoxes["-0.05"], 
-               TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[
-                TypeSystem`NestedGrid`PackagePrivate`localHold[
-                TypeSystem`NestedGrid`PackagePrivate`$outputID$$]][{
-                 Key["KO"], 
-                 Key["MDD"]}, "Item", False], "Mouse"], 
-              ImageSize -> {{60, Full}, Automatic}, 
               ImageMargins -> {{5, 3}, {4, 5}}], 
              ItemSize -> {Full, Automatic}]}, {
             Item[
              Pane[
-              Annotation[
-               EventHandler[
-                MouseAppearance[
-                 Mouseover["TSM", 
-                  Style[
-                  "TSM", FontColor -> 
-                   RGBColor[
-                    0.27450980392156865`, 0.5372549019607843, 
-                    0.792156862745098]]], "LinkHand"], {"MouseClicked", 1} :> 
-                If[
-                  TypeSystem`NestedGrid`PackagePrivate`checkInteractivity[
-                  TypeSystem`NestedGrid`PackagePrivate`$state$$], 
-                  TypeSystem`NestedGrid`PackagePrivate`updateState[
-                  TypeSystem`NestedGrid`PackagePrivate`$state$$, 
-                   TypeSystem`NestedGrid`PackagePrivate`$path$$, 
-                   TypeSystem`NestedGrid`PackagePrivate`$vPos$$, 
-                   TypeSystem`NestedGrid`PackagePrivate`$hPos$$, 
-                   TypeSystem`NestedGrid`PackagePrivate`$grid$$, 
-                   TypeSystem`NestedGrid`PackagePrivate`localHold[
-                    TypeSystem`NestedGrid`PackagePrivate`localHold[
-                    TypeSystem`NestedGrid`PackagePrivate`$outputID$$]]][{
-                    Key["TSM"]}, 1]]], 
+              Annotation["KO", 
                TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[
                 TypeSystem`NestedGrid`PackagePrivate`localHold[
-                TypeSystem`NestedGrid`PackagePrivate`$outputID$$]][{
-                 Key["TSM"]}, "RowHeader", False], "Mouse"], 
+                TypeSystem`NestedGrid`PackagePrivate`$outputID$$]][{5}, 
+                "Item", False], "Mouse"], 
               ImageSize -> {{44.800000000000004`, Full}, Automatic}, 
-              ImageMargins -> {{5, 3}, {4, 5}}], Background -> 
-             GrayLevel[0.95], Alignment -> {Left, Baseline}], 
-            Item[
-             Pane[
-              Annotation[
-               RawBoxes["1.22"], 
-               TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[
-                TypeSystem`NestedGrid`PackagePrivate`localHold[
-                TypeSystem`NestedGrid`PackagePrivate`$outputID$$]][{
-                 Key["TSM"], 
-                 Key["\[Mu]"]}, "Item", False], "Mouse"], 
-              ImageSize -> {{60, Full}, Automatic}, 
-              ImageMargins -> {{5, 3}, {4, 5}}], 
-             ItemSize -> {Full, Automatic}], 
-            Item[
-             Pane[
-              Annotation[
-               RawBoxes["0.4"], 
-               TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[
-                TypeSystem`NestedGrid`PackagePrivate`localHold[
-                TypeSystem`NestedGrid`PackagePrivate`$outputID$$]][{
-                 Key["TSM"], 
-                 Key["\[Sigma]"]}, "Item", False], "Mouse"], 
-              ImageSize -> {{60, Full}, Automatic}, 
-              ImageMargins -> {{5, 3}, {4, 5}}], 
-             ItemSize -> {Full, Automatic}], 
-            Item[
-             Pane[
-              Annotation[
-               RawBoxes["3.03"], 
-               TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[
-                TypeSystem`NestedGrid`PackagePrivate`localHold[
-                TypeSystem`NestedGrid`PackagePrivate`$outputID$$]][{
-                 Key["TSM"], 
-                 Key["s"]}, "Item", False], "Mouse"], 
-              ImageSize -> {{60, Full}, Automatic}, 
-              ImageMargins -> {{5, 3}, {4, 5}}], 
-             ItemSize -> {Full, Automatic}], 
-            Item[
-             Pane[
-              Annotation[
-               RawBoxes["0.68"], 
-               TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[
-                TypeSystem`NestedGrid`PackagePrivate`localHold[
-                TypeSystem`NestedGrid`PackagePrivate`$outputID$$]][{
-                 Key["TSM"], 
-                 Key["\[Alpha]"]}, "Item", False], "Mouse"], 
-              ImageSize -> {{60, Full}, Automatic}, 
-              ImageMargins -> {{5, 3}, {4, 5}}], 
-             ItemSize -> {Full, Automatic}], 
-            Item[
-             Pane[
-              Annotation[
-               RawBoxes["2.12"], 
-               TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[
-                TypeSystem`NestedGrid`PackagePrivate`localHold[
-                TypeSystem`NestedGrid`PackagePrivate`$outputID$$]][{
-                 Key["TSM"], 
-                 Key["\[Beta]"]}, "Item", False], "Mouse"], 
-              ImageSize -> {{60, Full}, Automatic}, 
-              ImageMargins -> {{5, 3}, {4, 5}}], 
-             ItemSize -> {Full, Automatic}], 
-            Item[
-             Pane[
-              Annotation[
-               RawBoxes["-0.23"], 
-               TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[
-                TypeSystem`NestedGrid`PackagePrivate`localHold[
-                TypeSystem`NestedGrid`PackagePrivate`$outputID$$]][{
-                 Key["TSM"], 
-                 Key["MDD"]}, "Item", False], "Mouse"], 
-              ImageSize -> {{60, Full}, Automatic}, 
               ImageMargins -> {{5, 3}, {4, 5}}], 
              ItemSize -> {Full, Automatic}]}, {
             Item[
              Pane[
-              Annotation[
-               EventHandler[
-                MouseAppearance[
-                 Mouseover["NFLX", 
-                  Style[
-                  "NFLX", FontColor -> 
-                   RGBColor[
-                    0.27450980392156865`, 0.5372549019607843, 
-                    0.792156862745098]]], "LinkHand"], {"MouseClicked", 1} :> 
-                If[
-                  TypeSystem`NestedGrid`PackagePrivate`checkInteractivity[
-                  TypeSystem`NestedGrid`PackagePrivate`$state$$], 
-                  TypeSystem`NestedGrid`PackagePrivate`updateState[
-                  TypeSystem`NestedGrid`PackagePrivate`$state$$, 
-                   TypeSystem`NestedGrid`PackagePrivate`$path$$, 
-                   TypeSystem`NestedGrid`PackagePrivate`$vPos$$, 
-                   TypeSystem`NestedGrid`PackagePrivate`$hPos$$, 
-                   TypeSystem`NestedGrid`PackagePrivate`$grid$$, 
-                   TypeSystem`NestedGrid`PackagePrivate`localHold[
-                    TypeSystem`NestedGrid`PackagePrivate`localHold[
-                    TypeSystem`NestedGrid`PackagePrivate`$outputID$$]]][{
-                    Key["NFLX"]}, 1]]], 
+              Annotation["LLY", 
                TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[
                 TypeSystem`NestedGrid`PackagePrivate`localHold[
-                TypeSystem`NestedGrid`PackagePrivate`$outputID$$]][{
-                 Key["NFLX"]}, "RowHeader", False], "Mouse"], 
+                TypeSystem`NestedGrid`PackagePrivate`$outputID$$]][{6}, 
+                "Item", False], "Mouse"], 
               ImageSize -> {{44.800000000000004`, Full}, Automatic}, 
-              ImageMargins -> {{5, 3}, {4, 5}}], Background -> 
-             GrayLevel[0.95], Alignment -> {Left, Baseline}], 
-            Item[
-             Pane[
-              Annotation[
-               RawBoxes["0.83"], 
-               TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[
-                TypeSystem`NestedGrid`PackagePrivate`localHold[
-                TypeSystem`NestedGrid`PackagePrivate`$outputID$$]][{
-                 Key["NFLX"], 
-                 Key["\[Mu]"]}, "Item", False], "Mouse"], 
-              ImageSize -> {{60, Full}, Automatic}, 
-              ImageMargins -> {{5, 3}, {4, 5}}], 
-             ItemSize -> {Full, Automatic}], 
-            Item[
-             Pane[
-              Annotation[
-               RawBoxes["0.29"], 
-               TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[
-                TypeSystem`NestedGrid`PackagePrivate`localHold[
-                TypeSystem`NestedGrid`PackagePrivate`$outputID$$]][{
-                 Key["NFLX"], 
-                 Key["\[Sigma]"]}, "Item", False], "Mouse"], 
-              ImageSize -> {{60, Full}, Automatic}, 
-              ImageMargins -> {{5, 3}, {4, 5}}], 
-             ItemSize -> {Full, Automatic}], 
-            Item[
-             Pane[
-              Annotation[
-               RawBoxes["2.84"], 
-               TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[
-                TypeSystem`NestedGrid`PackagePrivate`localHold[
-                TypeSystem`NestedGrid`PackagePrivate`$outputID$$]][{
-                 Key["NFLX"], 
-                 Key["s"]}, "Item", False], "Mouse"], 
-              ImageSize -> {{60, Full}, Automatic}, 
-              ImageMargins -> {{5, 3}, {4, 5}}], 
-             ItemSize -> {Full, Automatic}], 
-            Item[
-             Pane[
-              Annotation[
-               RawBoxes["0.56"], 
-               TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[
-                TypeSystem`NestedGrid`PackagePrivate`localHold[
-                TypeSystem`NestedGrid`PackagePrivate`$outputID$$]][{
-                 Key["NFLX"], 
-                 Key["\[Alpha]"]}, "Item", False], "Mouse"], 
-              ImageSize -> {{60, Full}, Automatic}, 
-              ImageMargins -> {{5, 3}, {4, 5}}], 
-             ItemSize -> {Full, Automatic}], 
-            Item[
-             Pane[
-              Annotation[
-               RawBoxes["1.07"], 
-               TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[
-                TypeSystem`NestedGrid`PackagePrivate`localHold[
-                TypeSystem`NestedGrid`PackagePrivate`$outputID$$]][{
-                 Key["NFLX"], 
-                 Key["\[Beta]"]}, "Item", False], "Mouse"], 
-              ImageSize -> {{60, Full}, Automatic}, 
-              ImageMargins -> {{5, 3}, {4, 5}}], 
-             ItemSize -> {Full, Automatic}], 
-            Item[
-             Pane[
-              Annotation[
-               RawBoxes["-0.13"], 
-               TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[
-                TypeSystem`NestedGrid`PackagePrivate`localHold[
-                TypeSystem`NestedGrid`PackagePrivate`$outputID$$]][{
-                 Key["NFLX"], 
-                 Key["MDD"]}, "Item", False], "Mouse"], 
-              ImageSize -> {{60, Full}, Automatic}, 
               ImageMargins -> {{5, 3}, {4, 5}}], 
              ItemSize -> {Full, Automatic}]}, {
             Item[
              Pane[
-              Annotation[
-               EventHandler[
-                MouseAppearance[
-                 Mouseover["AXP", 
-                  Style[
-                  "AXP", FontColor -> 
-                   RGBColor[
-                    0.27450980392156865`, 0.5372549019607843, 
-                    0.792156862745098]]], "LinkHand"], {"MouseClicked", 1} :> 
-                If[
-                  TypeSystem`NestedGrid`PackagePrivate`checkInteractivity[
-                  TypeSystem`NestedGrid`PackagePrivate`$state$$], 
-                  TypeSystem`NestedGrid`PackagePrivate`updateState[
-                  TypeSystem`NestedGrid`PackagePrivate`$state$$, 
-                   TypeSystem`NestedGrid`PackagePrivate`$path$$, 
-                   TypeSystem`NestedGrid`PackagePrivate`$vPos$$, 
-                   TypeSystem`NestedGrid`PackagePrivate`$hPos$$, 
-                   TypeSystem`NestedGrid`PackagePrivate`$grid$$, 
-                   TypeSystem`NestedGrid`PackagePrivate`localHold[
-                    TypeSystem`NestedGrid`PackagePrivate`localHold[
-                    TypeSystem`NestedGrid`PackagePrivate`$outputID$$]]][{
-                    Key["AXP"]}, 1]]], 
+              Annotation["NVDA", 
                TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[
                 TypeSystem`NestedGrid`PackagePrivate`localHold[
-                TypeSystem`NestedGrid`PackagePrivate`$outputID$$]][{
-                 Key["AXP"]}, "RowHeader", False], "Mouse"], 
+                TypeSystem`NestedGrid`PackagePrivate`$outputID$$]][{7}, 
+                "Item", False], "Mouse"], 
               ImageSize -> {{44.800000000000004`, Full}, Automatic}, 
-              ImageMargins -> {{5, 3}, {4, 5}}], Background -> 
-             GrayLevel[0.95], Alignment -> {Left, Baseline}], 
-            Item[
-             Pane[
-              Annotation[
-               RawBoxes["0.63"], 
-               TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[
-                TypeSystem`NestedGrid`PackagePrivate`localHold[
-                TypeSystem`NestedGrid`PackagePrivate`$outputID$$]][{
-                 Key["AXP"], 
-                 Key["\[Mu]"]}, "Item", False], "Mouse"], 
-              ImageSize -> {{60, Full}, Automatic}, 
-              ImageMargins -> {{5, 3}, {4, 5}}], 
-             ItemSize -> {Full, Automatic}], 
-            Item[
-             Pane[
-              Annotation[
-               RawBoxes["0.23"], 
-               TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[
-                TypeSystem`NestedGrid`PackagePrivate`localHold[
-                TypeSystem`NestedGrid`PackagePrivate`$outputID$$]][{
-                 Key["AXP"], 
-                 Key["\[Sigma]"]}, "Item", False], "Mouse"], 
-              ImageSize -> {{60, Full}, Automatic}, 
-              ImageMargins -> {{5, 3}, {4, 5}}], 
-             ItemSize -> {Full, Automatic}], 
-            Item[
-             Pane[
-              Annotation[
-               RawBoxes["2.74"], 
-               TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[
-                TypeSystem`NestedGrid`PackagePrivate`localHold[
-                TypeSystem`NestedGrid`PackagePrivate`$outputID$$]][{
-                 Key["AXP"], 
-                 Key["s"]}, "Item", False], "Mouse"], 
-              ImageSize -> {{60, Full}, Automatic}, 
-              ImageMargins -> {{5, 3}, {4, 5}}], 
-             ItemSize -> {Full, Automatic}], 
-            Item[
-             Pane[
-              Annotation[
-               RawBoxes["0.4"], 
-               TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[
-                TypeSystem`NestedGrid`PackagePrivate`localHold[
-                TypeSystem`NestedGrid`PackagePrivate`$outputID$$]][{
-                 Key["AXP"], 
-                 Key["\[Alpha]"]}, "Item", False], "Mouse"], 
-              ImageSize -> {{60, Full}, Automatic}, 
-              ImageMargins -> {{5, 3}, {4, 5}}], 
-             ItemSize -> {Full, Automatic}], 
-            Item[
-             Pane[
-              Annotation[
-               RawBoxes["0.93"], 
-               TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[
-                TypeSystem`NestedGrid`PackagePrivate`localHold[
-                TypeSystem`NestedGrid`PackagePrivate`$outputID$$]][{
-                 Key["AXP"], 
-                 Key["\[Beta]"]}, "Item", False], "Mouse"], 
-              ImageSize -> {{60, Full}, Automatic}, 
-              ImageMargins -> {{5, 3}, {4, 5}}], 
-             ItemSize -> {Full, Automatic}], 
-            Item[
-             Pane[
-              Annotation[
-               RawBoxes["-0.11"], 
-               TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[
-                TypeSystem`NestedGrid`PackagePrivate`localHold[
-                TypeSystem`NestedGrid`PackagePrivate`$outputID$$]][{
-                 Key["AXP"], 
-                 Key["MDD"]}, "Item", False], "Mouse"], 
-              ImageSize -> {{60, Full}, Automatic}, 
               ImageMargins -> {{5, 3}, {4, 5}}], 
              ItemSize -> {Full, Automatic}]}, {
             Item[
              Pane[
-              Annotation[
-               EventHandler[
-                MouseAppearance[
-                 Mouseover["JPM", 
-                  Style[
-                  "JPM", FontColor -> 
-                   RGBColor[
-                    0.27450980392156865`, 0.5372549019607843, 
-                    0.792156862745098]]], "LinkHand"], {"MouseClicked", 1} :> 
-                If[
-                  TypeSystem`NestedGrid`PackagePrivate`checkInteractivity[
-                  TypeSystem`NestedGrid`PackagePrivate`$state$$], 
-                  TypeSystem`NestedGrid`PackagePrivate`updateState[
-                  TypeSystem`NestedGrid`PackagePrivate`$state$$, 
-                   TypeSystem`NestedGrid`PackagePrivate`$path$$, 
-                   TypeSystem`NestedGrid`PackagePrivate`$vPos$$, 
-                   TypeSystem`NestedGrid`PackagePrivate`$hPos$$, 
-                   TypeSystem`NestedGrid`PackagePrivate`$grid$$, 
-                   TypeSystem`NestedGrid`PackagePrivate`localHold[
-                    TypeSystem`NestedGrid`PackagePrivate`localHold[
-                    TypeSystem`NestedGrid`PackagePrivate`$outputID$$]]][{
-                    Key["JPM"]}, 1]]], 
+              Annotation["OEF", 
                TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[
                 TypeSystem`NestedGrid`PackagePrivate`localHold[
-                TypeSystem`NestedGrid`PackagePrivate`$outputID$$]][{
-                 Key["JPM"]}, "RowHeader", False], "Mouse"], 
+                TypeSystem`NestedGrid`PackagePrivate`$outputID$$]][{8}, 
+                "Item", False], "Mouse"], 
               ImageSize -> {{44.800000000000004`, Full}, Automatic}, 
-              ImageMargins -> {{5, 3}, {4, 5}}], Background -> 
-             GrayLevel[0.95], Alignment -> {Left, Baseline}], 
-            Item[
-             Pane[
-              Annotation[
-               RawBoxes["0.53"], 
-               TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[
-                TypeSystem`NestedGrid`PackagePrivate`localHold[
-                TypeSystem`NestedGrid`PackagePrivate`$outputID$$]][{
-                 Key["JPM"], 
-                 Key["\[Mu]"]}, "Item", False], "Mouse"], 
-              ImageSize -> {{60, Full}, Automatic}, 
               ImageMargins -> {{5, 3}, {4, 5}}], 
-             ItemSize -> {Full, Automatic}], 
-            Item[
-             Pane[
-              Annotation[
-               RawBoxes["0.2"], 
-               TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[
-                TypeSystem`NestedGrid`PackagePrivate`localHold[
-                TypeSystem`NestedGrid`PackagePrivate`$outputID$$]][{
-                 Key["JPM"], 
-                 Key["\[Sigma]"]}, "Item", False], "Mouse"], 
-              ImageSize -> {{60, Full}, Automatic}, 
-              ImageMargins -> {{5, 3}, {4, 5}}], 
-             ItemSize -> {Full, Automatic}], 
-            Item[
-             Pane[
-              Annotation[
-               RawBoxes["2.7"], 
-               TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[
-                TypeSystem`NestedGrid`PackagePrivate`localHold[
-                TypeSystem`NestedGrid`PackagePrivate`$outputID$$]][{
-                 Key["JPM"], 
-                 Key["s"]}, "Item", False], "Mouse"], 
-              ImageSize -> {{60, Full}, Automatic}, 
-              ImageMargins -> {{5, 3}, {4, 5}}], 
-             ItemSize -> {Full, Automatic}], 
-            Item[
-             Pane[
-              Annotation[
-               RawBoxes["0.36"], 
-               TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[
-                TypeSystem`NestedGrid`PackagePrivate`localHold[
-                TypeSystem`NestedGrid`PackagePrivate`$outputID$$]][{
-                 Key["JPM"], 
-                 Key["\[Alpha]"]}, "Item", False], "Mouse"], 
-              ImageSize -> {{60, Full}, Automatic}, 
-              ImageMargins -> {{5, 3}, {4, 5}}], 
-             ItemSize -> {Full, Automatic}], 
-            Item[
-             Pane[
-              Annotation[
-               RawBoxes["0.7"], 
-               TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[
-                TypeSystem`NestedGrid`PackagePrivate`localHold[
-                TypeSystem`NestedGrid`PackagePrivate`$outputID$$]][{
-                 Key["JPM"], 
-                 Key["\[Beta]"]}, "Item", False], "Mouse"], 
-              ImageSize -> {{60, Full}, Automatic}, 
-              ImageMargins -> {{5, 3}, {4, 5}}], 
-             ItemSize -> {Full, Automatic}], 
-            Item[
-             Pane[
-              Annotation[
-               RawBoxes["-0.1"], 
-               TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[
-                TypeSystem`NestedGrid`PackagePrivate`localHold[
-                TypeSystem`NestedGrid`PackagePrivate`$outputID$$]][{
-                 Key["JPM"], 
-                 Key["MDD"]}, "Item", False], "Mouse"], 
-              ImageSize -> {{60, Full}, Automatic}, 
-              ImageMargins -> {{5, 3}, {4, 5}}], 
-             ItemSize -> {Full, Automatic}]}, {
-            Item[
-             Pane[
-              Annotation[
-               EventHandler[
-                MouseAppearance[
-                 Mouseover["OEF", 
-                  Style[
-                  "OEF", FontColor -> 
-                   RGBColor[
-                    0.27450980392156865`, 0.5372549019607843, 
-                    0.792156862745098]]], "LinkHand"], {"MouseClicked", 1} :> 
-                If[
-                  TypeSystem`NestedGrid`PackagePrivate`checkInteractivity[
-                  TypeSystem`NestedGrid`PackagePrivate`$state$$], 
-                  TypeSystem`NestedGrid`PackagePrivate`updateState[
-                  TypeSystem`NestedGrid`PackagePrivate`$state$$, 
-                   TypeSystem`NestedGrid`PackagePrivate`$path$$, 
-                   TypeSystem`NestedGrid`PackagePrivate`$vPos$$, 
-                   TypeSystem`NestedGrid`PackagePrivate`$hPos$$, 
-                   TypeSystem`NestedGrid`PackagePrivate`$grid$$, 
-                   TypeSystem`NestedGrid`PackagePrivate`localHold[
-                    TypeSystem`NestedGrid`PackagePrivate`localHold[
-                    TypeSystem`NestedGrid`PackagePrivate`$outputID$$]]][{
-                    Key["OEF"]}, 1]]], 
-               TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[
-                TypeSystem`NestedGrid`PackagePrivate`localHold[
-                TypeSystem`NestedGrid`PackagePrivate`$outputID$$]][{
-                 Key["OEF"]}, "RowHeader", False], "Mouse"], 
-              ImageSize -> {{44.800000000000004`, Full}, Automatic}, 
-              ImageMargins -> {{5, 3}, {4, 5}}], Background -> 
-             GrayLevel[0.95], Alignment -> {Left, Baseline}], 
-            Item[
-             Pane[
-              Annotation[
-               RawBoxes["0.36"], 
-               TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[
-                TypeSystem`NestedGrid`PackagePrivate`localHold[
-                TypeSystem`NestedGrid`PackagePrivate`$outputID$$]][{
-                 Key["OEF"], 
-                 Key["\[Mu]"]}, "Item", False], "Mouse"], 
-              ImageSize -> {{60, Full}, Automatic}, 
-              ImageMargins -> {{5, 3}, {4, 5}}], 
-             ItemSize -> {Full, Automatic}], 
-            Item[
-             Pane[
-              Annotation[
-               RawBoxes["0.14"], 
-               TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[
-                TypeSystem`NestedGrid`PackagePrivate`localHold[
-                TypeSystem`NestedGrid`PackagePrivate`$outputID$$]][{
-                 Key["OEF"], 
-                 Key["\[Sigma]"]}, "Item", False], "Mouse"], 
-              ImageSize -> {{60, Full}, Automatic}, 
-              ImageMargins -> {{5, 3}, {4, 5}}], 
-             ItemSize -> {Full, Automatic}], 
-            Item[
-             Pane[
-              Annotation[
-               RawBoxes["2.65"], 
-               TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[
-                TypeSystem`NestedGrid`PackagePrivate`localHold[
-                TypeSystem`NestedGrid`PackagePrivate`$outputID$$]][{
-                 Key["OEF"], 
-                 Key["s"]}, "Item", False], "Mouse"], 
-              ImageSize -> {{60, Full}, Automatic}, 
-              ImageMargins -> {{5, 3}, {4, 5}}], 
-             ItemSize -> {Full, Automatic}], 
-            Item[
-             Pane[
-              Annotation[
-               RawBoxes["0.1"], 
-               TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[
-                TypeSystem`NestedGrid`PackagePrivate`localHold[
-                TypeSystem`NestedGrid`PackagePrivate`$outputID$$]][{
-                 Key["OEF"], 
-                 Key["\[Alpha]"]}, "Item", False], "Mouse"], 
-              ImageSize -> {{60, Full}, Automatic}, 
-              ImageMargins -> {{5, 3}, {4, 5}}], 
-             ItemSize -> {Full, Automatic}], 
-            Item[
-             Pane[
-              Annotation[
-               RawBoxes["1.05"], 
-               TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[
-                TypeSystem`NestedGrid`PackagePrivate`localHold[
-                TypeSystem`NestedGrid`PackagePrivate`$outputID$$]][{
-                 Key["OEF"], 
-                 Key["\[Beta]"]}, "Item", False], "Mouse"], 
-              ImageSize -> {{60, Full}, Automatic}, 
-              ImageMargins -> {{5, 3}, {4, 5}}], 
-             ItemSize -> {Full, Automatic}], 
-            Item[
-             Pane[
-              Annotation[
-               RawBoxes["-0.1"], 
-               TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[
-                TypeSystem`NestedGrid`PackagePrivate`localHold[
-                TypeSystem`NestedGrid`PackagePrivate`$outputID$$]][{
-                 Key["OEF"], 
-                 Key["MDD"]}, "Item", False], "Mouse"], 
-              ImageSize -> {{60, Full}, Automatic}, 
-              ImageMargins -> {{5, 3}, {4, 5}}], 
-             ItemSize -> {Full, Automatic}]}, {
-            Item[
-             Pane[
-              Annotation[
-               EventHandler[
-                MouseAppearance[
-                 Mouseover["GS", 
-                  Style[
-                  "GS", FontColor -> 
-                   RGBColor[
-                    0.27450980392156865`, 0.5372549019607843, 
-                    0.792156862745098]]], "LinkHand"], {"MouseClicked", 1} :> 
-                If[
-                  TypeSystem`NestedGrid`PackagePrivate`checkInteractivity[
-                  TypeSystem`NestedGrid`PackagePrivate`$state$$], 
-                  TypeSystem`NestedGrid`PackagePrivate`updateState[
-                  TypeSystem`NestedGrid`PackagePrivate`$state$$, 
-                   TypeSystem`NestedGrid`PackagePrivate`$path$$, 
-                   TypeSystem`NestedGrid`PackagePrivate`$vPos$$, 
-                   TypeSystem`NestedGrid`PackagePrivate`$hPos$$, 
-                   TypeSystem`NestedGrid`PackagePrivate`$grid$$, 
-                   TypeSystem`NestedGrid`PackagePrivate`localHold[
-                    TypeSystem`NestedGrid`PackagePrivate`localHold[
-                    TypeSystem`NestedGrid`PackagePrivate`$outputID$$]]][{
-                    Key["GS"]}, 1]]], 
-               TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[
-                TypeSystem`NestedGrid`PackagePrivate`localHold[
-                TypeSystem`NestedGrid`PackagePrivate`$outputID$$]][{
-                 Key["GS"]}, "RowHeader", False], "Mouse"], 
-              ImageSize -> {{44.800000000000004`, Full}, Automatic}, 
-              ImageMargins -> {{5, 3}, {4, 5}}], Background -> 
-             GrayLevel[0.95], Alignment -> {Left, Baseline}], 
-            Item[
-             Pane[
-              Annotation[
-               RawBoxes["0.55"], 
-               TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[
-                TypeSystem`NestedGrid`PackagePrivate`localHold[
-                TypeSystem`NestedGrid`PackagePrivate`$outputID$$]][{
-                 Key["GS"], 
-                 Key["\[Mu]"]}, "Item", False], "Mouse"], 
-              ImageSize -> {{60, Full}, Automatic}, 
-              ImageMargins -> {{5, 3}, {4, 5}}], 
-             ItemSize -> {Full, Automatic}], 
-            Item[
-             Pane[
-              Annotation[
-               RawBoxes["0.22"], 
-               TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[
-                TypeSystem`NestedGrid`PackagePrivate`localHold[
-                TypeSystem`NestedGrid`PackagePrivate`$outputID$$]][{
-                 Key["GS"], 
-                 Key["\[Sigma]"]}, "Item", False], "Mouse"], 
-              ImageSize -> {{60, Full}, Automatic}, 
-              ImageMargins -> {{5, 3}, {4, 5}}], 
-             ItemSize -> {Full, Automatic}], 
-            Item[
-             Pane[
-              Annotation[
-               RawBoxes["2.55"], 
-               TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[
-                TypeSystem`NestedGrid`PackagePrivate`localHold[
-                TypeSystem`NestedGrid`PackagePrivate`$outputID$$]][{
-                 Key["GS"], 
-                 Key["s"]}, "Item", False], "Mouse"], 
-              ImageSize -> {{60, Full}, Automatic}, 
-              ImageMargins -> {{5, 3}, {4, 5}}], 
-             ItemSize -> {Full, Automatic}], 
-            Item[
-             Pane[
-              Annotation[
-               RawBoxes["0.29"], 
-               TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[
-                TypeSystem`NestedGrid`PackagePrivate`localHold[
-                TypeSystem`NestedGrid`PackagePrivate`$outputID$$]][{
-                 Key["GS"], 
-                 Key["\[Alpha]"]}, "Item", False], "Mouse"], 
-              ImageSize -> {{60, Full}, Automatic}, 
-              ImageMargins -> {{5, 3}, {4, 5}}], 
-             ItemSize -> {Full, Automatic}], 
-            Item[
-             Pane[
-              Annotation[
-               RawBoxes["1.01"], 
-               TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[
-                TypeSystem`NestedGrid`PackagePrivate`localHold[
-                TypeSystem`NestedGrid`PackagePrivate`$outputID$$]][{
-                 Key["GS"], 
-                 Key["\[Beta]"]}, "Item", False], "Mouse"], 
-              ImageSize -> {{60, Full}, Automatic}, 
-              ImageMargins -> {{5, 3}, {4, 5}}], 
-             ItemSize -> {Full, Automatic}], 
-            Item[
-             Pane[
-              Annotation[
-               RawBoxes["-0.1"], 
-               TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[
-                TypeSystem`NestedGrid`PackagePrivate`localHold[
-                TypeSystem`NestedGrid`PackagePrivate`$outputID$$]][{
-                 Key["GS"], 
-                 Key["MDD"]}, "Item", False], "Mouse"], 
-              ImageSize -> {{60, Full}, Automatic}, 
-              ImageMargins -> {{5, 3}, {4, 5}}], 
-             ItemSize -> {Full, Automatic}]}, {
-            Item[
-             Pane[
-              Annotation[
-               EventHandler[
-                MouseAppearance[
-                 Mouseover["SPY", 
-                  Style[
-                  "SPY", FontColor -> 
-                   RGBColor[
-                    0.27450980392156865`, 0.5372549019607843, 
-                    0.792156862745098]]], "LinkHand"], {"MouseClicked", 1} :> 
-                If[
-                  TypeSystem`NestedGrid`PackagePrivate`checkInteractivity[
-                  TypeSystem`NestedGrid`PackagePrivate`$state$$], 
-                  TypeSystem`NestedGrid`PackagePrivate`updateState[
-                  TypeSystem`NestedGrid`PackagePrivate`$state$$, 
-                   TypeSystem`NestedGrid`PackagePrivate`$path$$, 
-                   TypeSystem`NestedGrid`PackagePrivate`$vPos$$, 
-                   TypeSystem`NestedGrid`PackagePrivate`$hPos$$, 
-                   TypeSystem`NestedGrid`PackagePrivate`$grid$$, 
-                   TypeSystem`NestedGrid`PackagePrivate`localHold[
-                    TypeSystem`NestedGrid`PackagePrivate`localHold[
-                    TypeSystem`NestedGrid`PackagePrivate`$outputID$$]]][{
-                    Key["SPY"]}, 1]]], 
-               TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[
-                TypeSystem`NestedGrid`PackagePrivate`localHold[
-                TypeSystem`NestedGrid`PackagePrivate`$outputID$$]][{
-                 Key["SPY"]}, "RowHeader", False], "Mouse"], 
-              ImageSize -> {{44.800000000000004`, Full}, Automatic}, 
-              ImageMargins -> {{5, 3}, {4, 5}}], Background -> 
-             GrayLevel[0.95], Alignment -> {Left, Baseline}], 
-            Item[
-             Pane[
-              Annotation[
-               RawBoxes["0.31"], 
-               TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[
-                TypeSystem`NestedGrid`PackagePrivate`localHold[
-                TypeSystem`NestedGrid`PackagePrivate`$outputID$$]][{
-                 Key["SPY"], 
-                 Key["\[Mu]"]}, "Item", False], "Mouse"], 
-              ImageSize -> {{60, Full}, Automatic}, 
-              ImageMargins -> {{5, 3}, {4, 5}}], 
-             ItemSize -> {Full, Automatic}], 
-            Item[
-             Pane[
-              Annotation[
-               RawBoxes["0.13"], 
-               TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[
-                TypeSystem`NestedGrid`PackagePrivate`localHold[
-                TypeSystem`NestedGrid`PackagePrivate`$outputID$$]][{
-                 Key["SPY"], 
-                 Key["\[Sigma]"]}, "Item", False], "Mouse"], 
-              ImageSize -> {{60, Full}, Automatic}, 
-              ImageMargins -> {{5, 3}, {4, 5}}], 
-             ItemSize -> {Full, Automatic}], 
-            Item[
-             Pane[
-              Annotation[
-               RawBoxes["2.52"], 
-               TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[
-                TypeSystem`NestedGrid`PackagePrivate`localHold[
-                TypeSystem`NestedGrid`PackagePrivate`$outputID$$]][{
-                 Key["SPY"], 
-                 Key["s"]}, "Item", False], "Mouse"], 
-              ImageSize -> {{60, Full}, Automatic}, 
-              ImageMargins -> {{5, 3}, {4, 5}}], 
-             ItemSize -> {Full, Automatic}], 
-            Item[
-             Pane[
-              Annotation[
-               RawBoxes["0.06"], 
-               TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[
-                TypeSystem`NestedGrid`PackagePrivate`localHold[
-                TypeSystem`NestedGrid`PackagePrivate`$outputID$$]][{
-                 Key["SPY"], 
-                 Key["\[Alpha]"]}, "Item", False], "Mouse"], 
-              ImageSize -> {{60, Full}, Automatic}, 
-              ImageMargins -> {{5, 3}, {4, 5}}], 
-             ItemSize -> {Full, Automatic}], 
-            Item[
-             Pane[
-              Annotation[
-               RawBoxes["1.01"], 
-               TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[
-                TypeSystem`NestedGrid`PackagePrivate`localHold[
-                TypeSystem`NestedGrid`PackagePrivate`$outputID$$]][{
-                 Key["SPY"], 
-                 Key["\[Beta]"]}, "Item", False], "Mouse"], 
-              ImageSize -> {{60, Full}, Automatic}, 
-              ImageMargins -> {{5, 3}, {4, 5}}], 
-             ItemSize -> {Full, Automatic}], 
-            Item[
-             Pane[
-              Annotation[
-               RawBoxes["-0.08"], 
-               TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[
-                TypeSystem`NestedGrid`PackagePrivate`localHold[
-                TypeSystem`NestedGrid`PackagePrivate`$outputID$$]][{
-                 Key["SPY"], 
-                 Key["MDD"]}, "Item", False], "Mouse"], 
-              ImageSize -> {{60, Full}, Automatic}, 
-              ImageMargins -> {{5, 3}, {4, 5}}], 
-             ItemSize -> {Full, Automatic}]}, {
-            Item[
-             Pane[
-              Annotation[
-               EventHandler[
-                MouseAppearance[
-                 Mouseover["VTI", 
-                  Style[
-                  "VTI", FontColor -> 
-                   RGBColor[
-                    0.27450980392156865`, 0.5372549019607843, 
-                    0.792156862745098]]], "LinkHand"], {"MouseClicked", 1} :> 
-                If[
-                  TypeSystem`NestedGrid`PackagePrivate`checkInteractivity[
-                  TypeSystem`NestedGrid`PackagePrivate`$state$$], 
-                  TypeSystem`NestedGrid`PackagePrivate`updateState[
-                  TypeSystem`NestedGrid`PackagePrivate`$state$$, 
-                   TypeSystem`NestedGrid`PackagePrivate`$path$$, 
-                   TypeSystem`NestedGrid`PackagePrivate`$vPos$$, 
-                   TypeSystem`NestedGrid`PackagePrivate`$hPos$$, 
-                   TypeSystem`NestedGrid`PackagePrivate`$grid$$, 
-                   TypeSystem`NestedGrid`PackagePrivate`localHold[
-                    TypeSystem`NestedGrid`PackagePrivate`localHold[
-                    TypeSystem`NestedGrid`PackagePrivate`$outputID$$]]][{
-                    Key["VTI"]}, 1]]], 
-               TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[
-                TypeSystem`NestedGrid`PackagePrivate`localHold[
-                TypeSystem`NestedGrid`PackagePrivate`$outputID$$]][{
-                 Key["VTI"]}, "RowHeader", False], "Mouse"], 
-              ImageSize -> {{44.800000000000004`, Full}, Automatic}, 
-              ImageMargins -> {{5, 3}, {4, 5}}], Background -> 
-             GrayLevel[0.95], Alignment -> {Left, Baseline}], 
-            Item[
-             Pane[
-              Annotation[
-               RawBoxes["0.3"], 
-               TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[
-                TypeSystem`NestedGrid`PackagePrivate`localHold[
-                TypeSystem`NestedGrid`PackagePrivate`$outputID$$]][{
-                 Key["VTI"], 
-                 Key["\[Mu]"]}, "Item", False], "Mouse"], 
-              ImageSize -> {{60, Full}, Automatic}, 
-              ImageMargins -> {{5, 3}, {4, 5}}], 
-             ItemSize -> {Full, Automatic}], 
-            Item[
-             Pane[
-              Annotation[
-               RawBoxes["0.13"], 
-               TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[
-                TypeSystem`NestedGrid`PackagePrivate`localHold[
-                TypeSystem`NestedGrid`PackagePrivate`$outputID$$]][{
-                 Key["VTI"], 
-                 Key["\[Sigma]"]}, "Item", False], "Mouse"], 
-              ImageSize -> {{60, Full}, Automatic}, 
-              ImageMargins -> {{5, 3}, {4, 5}}], 
-             ItemSize -> {Full, Automatic}], 
-            Item[
-             Pane[
-              Annotation[
-               RawBoxes["2.33"], 
-               TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[
-                TypeSystem`NestedGrid`PackagePrivate`localHold[
-                TypeSystem`NestedGrid`PackagePrivate`$outputID$$]][{
-                 Key["VTI"], 
-                 Key["s"]}, "Item", False], "Mouse"], 
-              ImageSize -> {{60, Full}, Automatic}, 
-              ImageMargins -> {{5, 3}, {4, 5}}], 
-             ItemSize -> {Full, Automatic}], 
-            Item[
-             Pane[
-              Annotation[
-               RawBoxes["0.03"], 
-               TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[
-                TypeSystem`NestedGrid`PackagePrivate`localHold[
-                TypeSystem`NestedGrid`PackagePrivate`$outputID$$]][{
-                 Key["VTI"], 
-                 Key["\[Alpha]"]}, "Item", False], "Mouse"], 
-              ImageSize -> {{60, Full}, Automatic}, 
-              ImageMargins -> {{5, 3}, {4, 5}}], 
-             ItemSize -> {Full, Automatic}], 
-            Item[
-             Pane[
-              Annotation[
-               RawBoxes["1.04"], 
-               TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[
-                TypeSystem`NestedGrid`PackagePrivate`localHold[
-                TypeSystem`NestedGrid`PackagePrivate`$outputID$$]][{
-                 Key["VTI"], 
-                 Key["\[Beta]"]}, "Item", False], "Mouse"], 
-              ImageSize -> {{60, Full}, Automatic}, 
-              ImageMargins -> {{5, 3}, {4, 5}}], 
-             ItemSize -> {Full, Automatic}], 
-            Item[
-             Pane[
-              Annotation[
-               RawBoxes["-0.09"], 
-               TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[
-                TypeSystem`NestedGrid`PackagePrivate`localHold[
-                TypeSystem`NestedGrid`PackagePrivate`$outputID$$]][{
-                 Key["VTI"], 
-                 Key["MDD"]}, "Item", False], "Mouse"], 
-              ImageSize -> {{60, Full}, Automatic}, 
-              ImageMargins -> {{5, 3}, {4, 5}}], 
-             ItemSize -> {Full, Automatic}]}, {
-            Item[
-             Pane[
-              Annotation[
-               EventHandler[
-                MouseAppearance[
-                 Mouseover["SCHG", 
-                  Style[
-                  "SCHG", FontColor -> 
-                   RGBColor[
-                    0.27450980392156865`, 0.5372549019607843, 
-                    0.792156862745098]]], "LinkHand"], {"MouseClicked", 1} :> 
-                If[
-                  TypeSystem`NestedGrid`PackagePrivate`checkInteractivity[
-                  TypeSystem`NestedGrid`PackagePrivate`$state$$], 
-                  TypeSystem`NestedGrid`PackagePrivate`updateState[
-                  TypeSystem`NestedGrid`PackagePrivate`$state$$, 
-                   TypeSystem`NestedGrid`PackagePrivate`$path$$, 
-                   TypeSystem`NestedGrid`PackagePrivate`$vPos$$, 
-                   TypeSystem`NestedGrid`PackagePrivate`$hPos$$, 
-                   TypeSystem`NestedGrid`PackagePrivate`$grid$$, 
-                   TypeSystem`NestedGrid`PackagePrivate`localHold[
-                    TypeSystem`NestedGrid`PackagePrivate`localHold[
-                    TypeSystem`NestedGrid`PackagePrivate`$outputID$$]]][{
-                    Key["SCHG"]}, 1]]], 
-               TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[
-                TypeSystem`NestedGrid`PackagePrivate`localHold[
-                TypeSystem`NestedGrid`PackagePrivate`$outputID$$]][{
-                 Key["SCHG"]}, "RowHeader", False], "Mouse"], 
-              ImageSize -> {{44.800000000000004`, Full}, Automatic}, 
-              ImageMargins -> {{5, 3}, {4, 5}}], Background -> 
-             GrayLevel[0.95], Alignment -> {Left, Baseline}], 
-            Item[
-             Pane[
-              Annotation[
-               RawBoxes["0.39"], 
-               TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[
-                TypeSystem`NestedGrid`PackagePrivate`localHold[
-                TypeSystem`NestedGrid`PackagePrivate`$outputID$$]][{
-                 Key["SCHG"], 
-                 Key["\[Mu]"]}, "Item", False], "Mouse"], 
-              ImageSize -> {{60, Full}, Automatic}, 
-              ImageMargins -> {{5, 3}, {4, 5}}], 
-             ItemSize -> {Full, Automatic}], 
-            Item[
-             Pane[
-              Annotation[
-               RawBoxes["0.18"], 
-               TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[
-                TypeSystem`NestedGrid`PackagePrivate`localHold[
-                TypeSystem`NestedGrid`PackagePrivate`$outputID$$]][{
-                 Key["SCHG"], 
-                 Key["\[Sigma]"]}, "Item", False], "Mouse"], 
-              ImageSize -> {{60, Full}, Automatic}, 
-              ImageMargins -> {{5, 3}, {4, 5}}], 
-             ItemSize -> {Full, Automatic}], 
-            Item[
-             Pane[
-              Annotation[
-               RawBoxes["2.21"], 
-               TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[
-                TypeSystem`NestedGrid`PackagePrivate`localHold[
-                TypeSystem`NestedGrid`PackagePrivate`$outputID$$]][{
-                 Key["SCHG"], 
-                 Key["s"]}, "Item", False], "Mouse"], 
-              ImageSize -> {{60, Full}, Automatic}, 
-              ImageMargins -> {{5, 3}, {4, 5}}], 
-             ItemSize -> {Full, Automatic}], 
-            Item[
-             Pane[
-              Annotation[
-               RawBoxes["0.06"], 
-               TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[
-                TypeSystem`NestedGrid`PackagePrivate`localHold[
-                TypeSystem`NestedGrid`PackagePrivate`$outputID$$]][{
-                 Key["SCHG"], 
-                 Key["\[Alpha]"]}, "Item", False], "Mouse"], 
-              ImageSize -> {{60, Full}, Automatic}, 
-              ImageMargins -> {{5, 3}, {4, 5}}], 
-             ItemSize -> {Full, Automatic}], 
-            Item[
-             Pane[
-              Annotation[
-               RawBoxes["1.29"], 
-               TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[
-                TypeSystem`NestedGrid`PackagePrivate`localHold[
-                TypeSystem`NestedGrid`PackagePrivate`$outputID$$]][{
-                 Key["SCHG"], 
-                 Key["\[Beta]"]}, "Item", False], "Mouse"], 
-              ImageSize -> {{60, Full}, Automatic}, 
-              ImageMargins -> {{5, 3}, {4, 5}}], 
-             ItemSize -> {Full, Automatic}], 
-            Item[
-             Pane[
-              Annotation[
-               RawBoxes["-0.12"], 
-               TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[
-                TypeSystem`NestedGrid`PackagePrivate`localHold[
-                TypeSystem`NestedGrid`PackagePrivate`$outputID$$]][{
-                 Key["SCHG"], 
-                 Key["MDD"]}, "Item", False], "Mouse"], 
-              ImageSize -> {{60, Full}, Automatic}, 
-              ImageMargins -> {{5, 3}, {4, 5}}], 
-             ItemSize -> {Full, Automatic}]}, {
-            Item[
-             Pane[
-              Annotation[
-               EventHandler[
-                MouseAppearance[
-                 Mouseover["JEPI", 
-                  Style[
-                  "JEPI", FontColor -> 
-                   RGBColor[
-                    0.27450980392156865`, 0.5372549019607843, 
-                    0.792156862745098]]], "LinkHand"], {"MouseClicked", 1} :> 
-                If[
-                  TypeSystem`NestedGrid`PackagePrivate`checkInteractivity[
-                  TypeSystem`NestedGrid`PackagePrivate`$state$$], 
-                  TypeSystem`NestedGrid`PackagePrivate`updateState[
-                  TypeSystem`NestedGrid`PackagePrivate`$state$$, 
-                   TypeSystem`NestedGrid`PackagePrivate`$path$$, 
-                   TypeSystem`NestedGrid`PackagePrivate`$vPos$$, 
-                   TypeSystem`NestedGrid`PackagePrivate`$hPos$$, 
-                   TypeSystem`NestedGrid`PackagePrivate`$grid$$, 
-                   TypeSystem`NestedGrid`PackagePrivate`localHold[
-                    TypeSystem`NestedGrid`PackagePrivate`localHold[
-                    TypeSystem`NestedGrid`PackagePrivate`$outputID$$]]][{
-                    Key["JEPI"]}, 1]]], 
-               TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[
-                TypeSystem`NestedGrid`PackagePrivate`localHold[
-                TypeSystem`NestedGrid`PackagePrivate`$outputID$$]][{
-                 Key["JEPI"]}, "RowHeader", False], "Mouse"], 
-              ImageSize -> {{44.800000000000004`, Full}, Automatic}, 
-              ImageMargins -> {{5, 3}, {4, 5}}], Background -> 
-             GrayLevel[0.95], Alignment -> {Left, Baseline}], 
-            Item[
-             Pane[
-              Annotation[
-               RawBoxes["0.16"], 
-               TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[
-                TypeSystem`NestedGrid`PackagePrivate`localHold[
-                TypeSystem`NestedGrid`PackagePrivate`$outputID$$]][{
-                 Key["JEPI"], 
-                 Key["\[Mu]"]}, "Item", False], "Mouse"], 
-              ImageSize -> {{60, Full}, Automatic}, 
-              ImageMargins -> {{5, 3}, {4, 5}}], 
-             ItemSize -> {Full, Automatic}], 
-            Item[
-             Pane[
-              Annotation[
-               RawBoxes["0.08"], 
-               TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[
-                TypeSystem`NestedGrid`PackagePrivate`localHold[
-                TypeSystem`NestedGrid`PackagePrivate`$outputID$$]][{
-                 Key["JEPI"], 
-                 Key["\[Sigma]"]}, "Item", False], "Mouse"], 
-              ImageSize -> {{60, Full}, Automatic}, 
-              ImageMargins -> {{5, 3}, {4, 5}}], 
-             ItemSize -> {Full, Automatic}], 
-            Item[
-             Pane[
-              Annotation[
-               RawBoxes["2.15"], 
-               TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[
-                TypeSystem`NestedGrid`PackagePrivate`localHold[
-                TypeSystem`NestedGrid`PackagePrivate`$outputID$$]][{
-                 Key["JEPI"], 
-                 Key["s"]}, "Item", False], "Mouse"], 
-              ImageSize -> {{60, Full}, Automatic}, 
-              ImageMargins -> {{5, 3}, {4, 5}}], 
-             ItemSize -> {Full, Automatic}], 
-            Item[
-             Pane[
-              Annotation[
-               RawBoxes["0.03"], 
-               TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[
-                TypeSystem`NestedGrid`PackagePrivate`localHold[
-                TypeSystem`NestedGrid`PackagePrivate`$outputID$$]][{
-                 Key["JEPI"], 
-                 Key["\[Alpha]"]}, "Item", False], "Mouse"], 
-              ImageSize -> {{60, Full}, Automatic}, 
-              ImageMargins -> {{5, 3}, {4, 5}}], 
-             ItemSize -> {Full, Automatic}], 
-            Item[
-             Pane[
-              Annotation[
-               RawBoxes["0.51"], 
-               TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[
-                TypeSystem`NestedGrid`PackagePrivate`localHold[
-                TypeSystem`NestedGrid`PackagePrivate`$outputID$$]][{
-                 Key["JEPI"], 
-                 Key["\[Beta]"]}, "Item", False], "Mouse"], 
-              ImageSize -> {{60, Full}, Automatic}, 
-              ImageMargins -> {{5, 3}, {4, 5}}], 
-             ItemSize -> {Full, Automatic}], 
-            Item[
-             Pane[
-              Annotation[
-               RawBoxes["-0.04"], 
-               TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[
-                TypeSystem`NestedGrid`PackagePrivate`localHold[
-                TypeSystem`NestedGrid`PackagePrivate`$outputID$$]][{
-                 Key["JEPI"], 
-                 Key["MDD"]}, "Item", False], "Mouse"], 
-              ImageSize -> {{60, Full}, Automatic}, 
-              ImageMargins -> {{5, 3}, {4, 5}}], 
-             ItemSize -> {Full, Automatic}]}, {
-            Item[
-             Pane[
-              Annotation[
-               EventHandler[
-                MouseAppearance[
-                 Mouseover["VT", 
-                  Style[
-                  "VT", FontColor -> 
-                   RGBColor[
-                    0.27450980392156865`, 0.5372549019607843, 
-                    0.792156862745098]]], "LinkHand"], {"MouseClicked", 1} :> 
-                If[
-                  TypeSystem`NestedGrid`PackagePrivate`checkInteractivity[
-                  TypeSystem`NestedGrid`PackagePrivate`$state$$], 
-                  TypeSystem`NestedGrid`PackagePrivate`updateState[
-                  TypeSystem`NestedGrid`PackagePrivate`$state$$, 
-                   TypeSystem`NestedGrid`PackagePrivate`$path$$, 
-                   TypeSystem`NestedGrid`PackagePrivate`$vPos$$, 
-                   TypeSystem`NestedGrid`PackagePrivate`$hPos$$, 
-                   TypeSystem`NestedGrid`PackagePrivate`$grid$$, 
-                   TypeSystem`NestedGrid`PackagePrivate`localHold[
-                    TypeSystem`NestedGrid`PackagePrivate`localHold[
-                    TypeSystem`NestedGrid`PackagePrivate`$outputID$$]]][{
-                    Key["VT"]}, 1]]], 
-               TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[
-                TypeSystem`NestedGrid`PackagePrivate`localHold[
-                TypeSystem`NestedGrid`PackagePrivate`$outputID$$]][{
-                 Key["VT"]}, "RowHeader", False], "Mouse"], 
-              ImageSize -> {{44.800000000000004`, Full}, Automatic}, 
-              ImageMargins -> {{5, 3}, {4, 5}}], Background -> 
-             GrayLevel[0.95], Alignment -> {Left, Baseline}], 
-            Item[
-             Pane[
-              Annotation[
-               RawBoxes["0.25"], 
-               TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[
-                TypeSystem`NestedGrid`PackagePrivate`localHold[
-                TypeSystem`NestedGrid`PackagePrivate`$outputID$$]][{
-                 Key["VT"], 
-                 Key["\[Mu]"]}, "Item", False], "Mouse"], 
-              ImageSize -> {{60, Full}, Automatic}, 
-              ImageMargins -> {{5, 3}, {4, 5}}], 
-             ItemSize -> {Full, Automatic}], 
-            Item[
-             Pane[
-              Annotation[
-               RawBoxes["0.12"], 
-               TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[
-                TypeSystem`NestedGrid`PackagePrivate`localHold[
-                TypeSystem`NestedGrid`PackagePrivate`$outputID$$]][{
-                 Key["VT"], 
-                 Key["\[Sigma]"]}, "Item", False], "Mouse"], 
-              ImageSize -> {{60, Full}, Automatic}, 
-              ImageMargins -> {{5, 3}, {4, 5}}], 
-             ItemSize -> {Full, Automatic}], 
-            Item[
-             Pane[
-              Annotation[
-               RawBoxes["2.12"], 
-               TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[
-                TypeSystem`NestedGrid`PackagePrivate`localHold[
-                TypeSystem`NestedGrid`PackagePrivate`$outputID$$]][{
-                 Key["VT"], 
-                 Key["s"]}, "Item", False], "Mouse"], 
-              ImageSize -> {{60, Full}, Automatic}, 
-              ImageMargins -> {{5, 3}, {4, 5}}], 
-             ItemSize -> {Full, Automatic}], 
-            Item[
-             Pane[
-              Annotation[
-               RawBoxes["0.0"], 
-               TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[
-                TypeSystem`NestedGrid`PackagePrivate`localHold[
-                TypeSystem`NestedGrid`PackagePrivate`$outputID$$]][{
-                 Key["VT"], 
-                 Key["\[Alpha]"]}, "Item", False], "Mouse"], 
-              ImageSize -> {{60, Full}, Automatic}, 
-              ImageMargins -> {{5, 3}, {4, 5}}], 
-             ItemSize -> {Full, Automatic}], 
-            Item[
-             Pane[
-              Annotation[
-               RawBoxes["1.0"], 
-               TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[
-                TypeSystem`NestedGrid`PackagePrivate`localHold[
-                TypeSystem`NestedGrid`PackagePrivate`$outputID$$]][{
-                 Key["VT"], 
-                 Key["\[Beta]"]}, "Item", False], "Mouse"], 
-              ImageSize -> {{60, Full}, Automatic}, 
-              ImageMargins -> {{5, 3}, {4, 5}}], 
-             ItemSize -> {Full, Automatic}], 
-            Item[
-             Pane[
-              Annotation[
-               RawBoxes["-0.08"], 
-               TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[
-                TypeSystem`NestedGrid`PackagePrivate`localHold[
-                TypeSystem`NestedGrid`PackagePrivate`$outputID$$]][{
-                 Key["VT"], 
-                 Key["MDD"]}, "Item", False], "Mouse"], 
-              ImageSize -> {{60, Full}, Automatic}, 
-              ImageMargins -> {{5, 3}, {4, 5}}], 
-             ItemSize -> {Full, Automatic}]}, {
-            Item[
-             Pane[
-              Annotation[
-               EventHandler[
-                MouseAppearance[
-                 Mouseover["META", 
-                  Style[
-                  "META", FontColor -> 
-                   RGBColor[
-                    0.27450980392156865`, 0.5372549019607843, 
-                    0.792156862745098]]], "LinkHand"], {"MouseClicked", 1} :> 
-                If[
-                  TypeSystem`NestedGrid`PackagePrivate`checkInteractivity[
-                  TypeSystem`NestedGrid`PackagePrivate`$state$$], 
-                  TypeSystem`NestedGrid`PackagePrivate`updateState[
-                  TypeSystem`NestedGrid`PackagePrivate`$state$$, 
-                   TypeSystem`NestedGrid`PackagePrivate`$path$$, 
-                   TypeSystem`NestedGrid`PackagePrivate`$vPos$$, 
-                   TypeSystem`NestedGrid`PackagePrivate`$hPos$$, 
-                   TypeSystem`NestedGrid`PackagePrivate`$grid$$, 
-                   TypeSystem`NestedGrid`PackagePrivate`localHold[
-                    TypeSystem`NestedGrid`PackagePrivate`localHold[
-                    TypeSystem`NestedGrid`PackagePrivate`$outputID$$]]][{
-                    Key["META"]}, 1]]], 
-               TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[
-                TypeSystem`NestedGrid`PackagePrivate`localHold[
-                TypeSystem`NestedGrid`PackagePrivate`$outputID$$]][{
-                 Key["META"]}, "RowHeader", False], "Mouse"], 
-              ImageSize -> {{44.800000000000004`, Full}, Automatic}, 
-              ImageMargins -> {{5, 3}, {4, 5}}], Background -> 
-             GrayLevel[0.95], Alignment -> {Left, Baseline}], 
-            Item[
-             Pane[
-              Annotation[
-               RawBoxes["0.85"], 
-               TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[
-                TypeSystem`NestedGrid`PackagePrivate`localHold[
-                TypeSystem`NestedGrid`PackagePrivate`$outputID$$]][{
-                 Key["META"], 
-                 Key["\[Mu]"]}, "Item", False], "Mouse"], 
-              ImageSize -> {{60, Full}, Automatic}, 
-              ImageMargins -> {{5, 3}, {4, 5}}], 
-             ItemSize -> {Full, Automatic}], 
-            Item[
-             Pane[
-              Annotation[
-               RawBoxes["0.41"], 
-               TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[
-                TypeSystem`NestedGrid`PackagePrivate`localHold[
-                TypeSystem`NestedGrid`PackagePrivate`$outputID$$]][{
-                 Key["META"], 
-                 Key["\[Sigma]"]}, "Item", False], "Mouse"], 
-              ImageSize -> {{60, Full}, Automatic}, 
-              ImageMargins -> {{5, 3}, {4, 5}}], 
-             ItemSize -> {Full, Automatic}], 
-            Item[
-             Pane[
-              Annotation[
-               RawBoxes["2.08"], 
-               TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[
-                TypeSystem`NestedGrid`PackagePrivate`localHold[
-                TypeSystem`NestedGrid`PackagePrivate`$outputID$$]][{
-                 Key["META"], 
-                 Key["s"]}, "Item", False], "Mouse"], 
-              ImageSize -> {{60, Full}, Automatic}, 
-              ImageMargins -> {{5, 3}, {4, 5}}], 
-             ItemSize -> {Full, Automatic}], 
-            Item[
-             Pane[
-              Annotation[
-               RawBoxes["0.48"], 
-               TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[
-                TypeSystem`NestedGrid`PackagePrivate`localHold[
-                TypeSystem`NestedGrid`PackagePrivate`$outputID$$]][{
-                 Key["META"], 
-                 Key["\[Alpha]"]}, "Item", False], "Mouse"], 
-              ImageSize -> {{60, Full}, Automatic}, 
-              ImageMargins -> {{5, 3}, {4, 5}}], 
-             ItemSize -> {Full, Automatic}], 
-            Item[
-             Pane[
-              Annotation[
-               RawBoxes["1.48"], 
-               TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[
-                TypeSystem`NestedGrid`PackagePrivate`localHold[
-                TypeSystem`NestedGrid`PackagePrivate`$outputID$$]][{
-                 Key["META"], 
-                 Key["\[Beta]"]}, "Item", False], "Mouse"], 
-              ImageSize -> {{60, Full}, Automatic}, 
-              ImageMargins -> {{5, 3}, {4, 5}}], 
-             ItemSize -> {Full, Automatic}], 
-            Item[
-             Pane[
-              Annotation[
-               RawBoxes["-0.18"], 
-               TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[
-                TypeSystem`NestedGrid`PackagePrivate`localHold[
-                TypeSystem`NestedGrid`PackagePrivate`$outputID$$]][{
-                 Key["META"], 
-                 Key["MDD"]}, "Item", False], "Mouse"], 
-              ImageSize -> {{60, Full}, Automatic}, 
-              ImageMargins -> {{5, 3}, {4, 5}}], 
-             ItemSize -> {Full, Automatic}]}, {
-            Item[
-             Pane[
-              Annotation[
-               EventHandler[
-                MouseAppearance[
-                 Mouseover["IBM", 
-                  Style[
-                  "IBM", FontColor -> 
-                   RGBColor[
-                    0.27450980392156865`, 0.5372549019607843, 
-                    0.792156862745098]]], "LinkHand"], {"MouseClicked", 1} :> 
-                If[
-                  TypeSystem`NestedGrid`PackagePrivate`checkInteractivity[
-                  TypeSystem`NestedGrid`PackagePrivate`$state$$], 
-                  TypeSystem`NestedGrid`PackagePrivate`updateState[
-                  TypeSystem`NestedGrid`PackagePrivate`$state$$, 
-                   TypeSystem`NestedGrid`PackagePrivate`$path$$, 
-                   TypeSystem`NestedGrid`PackagePrivate`$vPos$$, 
-                   TypeSystem`NestedGrid`PackagePrivate`$hPos$$, 
-                   TypeSystem`NestedGrid`PackagePrivate`$grid$$, 
-                   TypeSystem`NestedGrid`PackagePrivate`localHold[
-                    TypeSystem`NestedGrid`PackagePrivate`localHold[
-                    TypeSystem`NestedGrid`PackagePrivate`$outputID$$]]][{
-                    Key["IBM"]}, 1]]], 
-               TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[
-                TypeSystem`NestedGrid`PackagePrivate`localHold[
-                TypeSystem`NestedGrid`PackagePrivate`$outputID$$]][{
-                 Key["IBM"]}, "RowHeader", False], "Mouse"], 
-              ImageSize -> {{44.800000000000004`, Full}, Automatic}, 
-              ImageMargins -> {{5, 3}, {4, 5}}], Background -> 
-             GrayLevel[0.95], Alignment -> {Left, Baseline}], 
-            Item[
-             Pane[
-              Annotation[
-               RawBoxes["0.46"], 
-               TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[
-                TypeSystem`NestedGrid`PackagePrivate`localHold[
-                TypeSystem`NestedGrid`PackagePrivate`$outputID$$]][{
-                 Key["IBM"], 
-                 Key["\[Mu]"]}, "Item", False], "Mouse"], 
-              ImageSize -> {{60, Full}, Automatic}, 
-              ImageMargins -> {{5, 3}, {4, 5}}], 
-             ItemSize -> {Full, Automatic}], 
-            Item[
-             Pane[
-              Annotation[
-               RawBoxes["0.24"], 
-               TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[
-                TypeSystem`NestedGrid`PackagePrivate`localHold[
-                TypeSystem`NestedGrid`PackagePrivate`$outputID$$]][{
-                 Key["IBM"], 
-                 Key["\[Sigma]"]}, "Item", False], "Mouse"], 
-              ImageSize -> {{60, Full}, Automatic}, 
-              ImageMargins -> {{5, 3}, {4, 5}}], 
-             ItemSize -> {Full, Automatic}], 
-            Item[
-             Pane[
-              Annotation[
-               RawBoxes["1.93"], 
-               TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[
-                TypeSystem`NestedGrid`PackagePrivate`localHold[
-                TypeSystem`NestedGrid`PackagePrivate`$outputID$$]][{
-                 Key["IBM"], 
-                 Key["s"]}, "Item", False], "Mouse"], 
-              ImageSize -> {{60, Full}, Automatic}, 
-              ImageMargins -> {{5, 3}, {4, 5}}], 
-             ItemSize -> {Full, Automatic}], 
-            Item[
-             Pane[
-              Annotation[
-               RawBoxes["0.25"], 
-               TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[
-                TypeSystem`NestedGrid`PackagePrivate`localHold[
-                TypeSystem`NestedGrid`PackagePrivate`$outputID$$]][{
-                 Key["IBM"], 
-                 Key["\[Alpha]"]}, "Item", False], "Mouse"], 
-              ImageSize -> {{60, Full}, Automatic}, 
-              ImageMargins -> {{5, 3}, {4, 5}}], 
-             ItemSize -> {Full, Automatic}], 
-            Item[
-             Pane[
-              Annotation[
-               RawBoxes["0.83"], 
-               TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[
-                TypeSystem`NestedGrid`PackagePrivate`localHold[
-                TypeSystem`NestedGrid`PackagePrivate`$outputID$$]][{
-                 Key["IBM"], 
-                 Key["\[Beta]"]}, "Item", False], "Mouse"], 
-              ImageSize -> {{60, Full}, Automatic}, 
-              ImageMargins -> {{5, 3}, {4, 5}}], 
-             ItemSize -> {Full, Automatic}], 
-            Item[
-             Pane[
-              Annotation[
-               RawBoxes["-0.17"], 
-               TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[
-                TypeSystem`NestedGrid`PackagePrivate`localHold[
-                TypeSystem`NestedGrid`PackagePrivate`$outputID$$]][{
-                 Key["IBM"], 
-                 Key["MDD"]}, "Item", False], "Mouse"], 
-              ImageSize -> {{60, Full}, Automatic}, 
-              ImageMargins -> {{5, 3}, {4, 5}}], 
-             ItemSize -> {Full, Automatic}]}, {
-            Item[
-             Pane[
-              Annotation[
-               EventHandler[
-                MouseAppearance[
-                 Mouseover["LIN", 
-                  Style[
-                  "LIN", FontColor -> 
-                   RGBColor[
-                    0.27450980392156865`, 0.5372549019607843, 
-                    0.792156862745098]]], "LinkHand"], {"MouseClicked", 1} :> 
-                If[
-                  TypeSystem`NestedGrid`PackagePrivate`checkInteractivity[
-                  TypeSystem`NestedGrid`PackagePrivate`$state$$], 
-                  TypeSystem`NestedGrid`PackagePrivate`updateState[
-                  TypeSystem`NestedGrid`PackagePrivate`$state$$, 
-                   TypeSystem`NestedGrid`PackagePrivate`$path$$, 
-                   TypeSystem`NestedGrid`PackagePrivate`$vPos$$, 
-                   TypeSystem`NestedGrid`PackagePrivate`$hPos$$, 
-                   TypeSystem`NestedGrid`PackagePrivate`$grid$$, 
-                   TypeSystem`NestedGrid`PackagePrivate`localHold[
-                    TypeSystem`NestedGrid`PackagePrivate`localHold[
-                    TypeSystem`NestedGrid`PackagePrivate`$outputID$$]]][{
-                    Key["LIN"]}, 1]]], 
-               TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[
-                TypeSystem`NestedGrid`PackagePrivate`localHold[
-                TypeSystem`NestedGrid`PackagePrivate`$outputID$$]][{
-                 Key["LIN"]}, "RowHeader", False], "Mouse"], 
-              ImageSize -> {{44.800000000000004`, Full}, Automatic}, 
-              ImageMargins -> {{5, 3}, {4, 5}}], Background -> 
-             GrayLevel[0.95], Alignment -> {Left, Baseline}], 
-            Item[
-             Pane[
-              Annotation[
-               RawBoxes["0.27"], 
-               TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[
-                TypeSystem`NestedGrid`PackagePrivate`localHold[
-                TypeSystem`NestedGrid`PackagePrivate`$outputID$$]][{
-                 Key["LIN"], 
-                 Key["\[Mu]"]}, "Item", False], "Mouse"], 
-              ImageSize -> {{60, Full}, Automatic}, 
-              ImageMargins -> {{5, 3}, {4, 5}}], 
-             ItemSize -> {Full, Automatic}], 
-            Item[
-             Pane[
-              Annotation[
-               RawBoxes["0.14"], 
-               TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[
-                TypeSystem`NestedGrid`PackagePrivate`localHold[
-                TypeSystem`NestedGrid`PackagePrivate`$outputID$$]][{
-                 Key["LIN"], 
-                 Key["\[Sigma]"]}, "Item", False], "Mouse"], 
-              ImageSize -> {{60, Full}, Automatic}, 
-              ImageMargins -> {{5, 3}, {4, 5}}], 
-             ItemSize -> {Full, Automatic}], 
-            Item[
-             Pane[
-              Annotation[
-               RawBoxes["1.9"], 
-               TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[
-                TypeSystem`NestedGrid`PackagePrivate`localHold[
-                TypeSystem`NestedGrid`PackagePrivate`$outputID$$]][{
-                 Key["LIN"], 
-                 Key["s"]}, "Item", False], "Mouse"], 
-              ImageSize -> {{60, Full}, Automatic}, 
-              ImageMargins -> {{5, 3}, {4, 5}}], 
-             ItemSize -> {Full, Automatic}], 
-            Item[
-             Pane[
-              Annotation[
-               RawBoxes["0.16"], 
-               TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[
-                TypeSystem`NestedGrid`PackagePrivate`localHold[
-                TypeSystem`NestedGrid`PackagePrivate`$outputID$$]][{
-                 Key["LIN"], 
-                 Key["\[Alpha]"]}, "Item", False], "Mouse"], 
-              ImageSize -> {{60, Full}, Automatic}, 
-              ImageMargins -> {{5, 3}, {4, 5}}], 
-             ItemSize -> {Full, Automatic}], 
-            Item[
-             Pane[
-              Annotation[
-               RawBoxes["0.44"], 
-               TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[
-                TypeSystem`NestedGrid`PackagePrivate`localHold[
-                TypeSystem`NestedGrid`PackagePrivate`$outputID$$]][{
-                 Key["LIN"], 
-                 Key["\[Beta]"]}, "Item", False], "Mouse"], 
-              ImageSize -> {{60, Full}, Automatic}, 
-              ImageMargins -> {{5, 3}, {4, 5}}], 
-             ItemSize -> {Full, Automatic}], 
-            Item[
-             Pane[
-              Annotation[
-               RawBoxes["-0.12"], 
-               TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[
-                TypeSystem`NestedGrid`PackagePrivate`localHold[
-                TypeSystem`NestedGrid`PackagePrivate`$outputID$$]][{
-                 Key["LIN"], 
-                 Key["MDD"]}, "Item", False], "Mouse"], 
-              ImageSize -> {{60, Full}, Automatic}, 
-              ImageMargins -> {{5, 3}, {4, 5}}], 
-             ItemSize -> {Full, Automatic}]}, {
-            Item[
-             Pane[
-              Annotation[
-               EventHandler[
-                MouseAppearance[
-                 Mouseover["AVGO", 
-                  Style[
-                  "AVGO", FontColor -> 
-                   RGBColor[
-                    0.27450980392156865`, 0.5372549019607843, 
-                    0.792156862745098]]], "LinkHand"], {"MouseClicked", 1} :> 
-                If[
-                  TypeSystem`NestedGrid`PackagePrivate`checkInteractivity[
-                  TypeSystem`NestedGrid`PackagePrivate`$state$$], 
-                  TypeSystem`NestedGrid`PackagePrivate`updateState[
-                  TypeSystem`NestedGrid`PackagePrivate`$state$$, 
-                   TypeSystem`NestedGrid`PackagePrivate`$path$$, 
-                   TypeSystem`NestedGrid`PackagePrivate`$vPos$$, 
-                   TypeSystem`NestedGrid`PackagePrivate`$hPos$$, 
-                   TypeSystem`NestedGrid`PackagePrivate`$grid$$, 
-                   TypeSystem`NestedGrid`PackagePrivate`localHold[
-                    TypeSystem`NestedGrid`PackagePrivate`localHold[
-                    TypeSystem`NestedGrid`PackagePrivate`$outputID$$]]][{
-                    Key["AVGO"]}, 1]]], 
-               TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[
-                TypeSystem`NestedGrid`PackagePrivate`localHold[
-                TypeSystem`NestedGrid`PackagePrivate`$outputID$$]][{
-                 Key["AVGO"]}, "RowHeader", False], "Mouse"], 
-              ImageSize -> {{44.800000000000004`, Full}, Automatic}, 
-              ImageMargins -> {{5, 3}, {4, 5}}], Background -> 
-             GrayLevel[0.95], Alignment -> {Left, Baseline}], 
-            Item[
-             Pane[
-              Annotation[
-               RawBoxes["0.86"], 
-               TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[
-                TypeSystem`NestedGrid`PackagePrivate`localHold[
-                TypeSystem`NestedGrid`PackagePrivate`$outputID$$]][{
-                 Key["AVGO"], 
-                 Key["\[Mu]"]}, "Item", False], "Mouse"], 
-              ImageSize -> {{60, Full}, Automatic}, 
-              ImageMargins -> {{5, 3}, {4, 5}}], 
-             ItemSize -> {Full, Automatic}], 
-            Item[
-             Pane[
-              Annotation[
-               RawBoxes["0.48"], 
-               TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[
-                TypeSystem`NestedGrid`PackagePrivate`localHold[
-                TypeSystem`NestedGrid`PackagePrivate`$outputID$$]][{
-                 Key["AVGO"], 
-                 Key["\[Sigma]"]}, "Item", False], "Mouse"], 
-              ImageSize -> {{60, Full}, Automatic}, 
-              ImageMargins -> {{5, 3}, {4, 5}}], 
-             ItemSize -> {Full, Automatic}], 
-            Item[
-             Pane[
-              Annotation[
-               RawBoxes["1.81"], 
-               TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[
-                TypeSystem`NestedGrid`PackagePrivate`localHold[
-                TypeSystem`NestedGrid`PackagePrivate`$outputID$$]][{
-                 Key["AVGO"], 
-                 Key["s"]}, "Item", False], "Mouse"], 
-              ImageSize -> {{60, Full}, Automatic}, 
-              ImageMargins -> {{5, 3}, {4, 5}}], 
-             ItemSize -> {Full, Automatic}], 
-            Item[
-             Pane[
-              Annotation[
-               RawBoxes["0.26"], 
-               TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[
-                TypeSystem`NestedGrid`PackagePrivate`localHold[
-                TypeSystem`NestedGrid`PackagePrivate`$outputID$$]][{
-                 Key["AVGO"], 
-                 Key["\[Alpha]"]}, "Item", False], "Mouse"], 
-              ImageSize -> {{60, Full}, Automatic}, 
-              ImageMargins -> {{5, 3}, {4, 5}}], 
-             ItemSize -> {Full, Automatic}], 
-            Item[
-             Pane[
-              Annotation[
-               RawBoxes["2.36"], 
-               TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[
-                TypeSystem`NestedGrid`PackagePrivate`localHold[
-                TypeSystem`NestedGrid`PackagePrivate`$outputID$$]][{
-                 Key["AVGO"], 
-                 Key["\[Beta]"]}, "Item", False], "Mouse"], 
-              ImageSize -> {{60, Full}, Automatic}, 
-              ImageMargins -> {{5, 3}, {4, 5}}], 
-             ItemSize -> {Full, Automatic}], 
-            Item[
-             Pane[
-              Annotation[
-               RawBoxes["-0.25"], 
-               TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[
-                TypeSystem`NestedGrid`PackagePrivate`localHold[
-                TypeSystem`NestedGrid`PackagePrivate`$outputID$$]][{
-                 Key["AVGO"], 
-                 Key["MDD"]}, "Item", False], "Mouse"], 
-              ImageSize -> {{60, Full}, Automatic}, 
-              ImageMargins -> {{5, 3}, {4, 5}}], 
-             ItemSize -> {Full, Automatic}]}, {
-            Item[
-             Pane[
-              Annotation[
-               EventHandler[
-                MouseAppearance[
-                 Mouseover["JEPQ", 
-                  Style[
-                  "JEPQ", FontColor -> 
-                   RGBColor[
-                    0.27450980392156865`, 0.5372549019607843, 
-                    0.792156862745098]]], "LinkHand"], {"MouseClicked", 1} :> 
-                If[
-                  TypeSystem`NestedGrid`PackagePrivate`checkInteractivity[
-                  TypeSystem`NestedGrid`PackagePrivate`$state$$], 
-                  TypeSystem`NestedGrid`PackagePrivate`updateState[
-                  TypeSystem`NestedGrid`PackagePrivate`$state$$, 
-                   TypeSystem`NestedGrid`PackagePrivate`$path$$, 
-                   TypeSystem`NestedGrid`PackagePrivate`$vPos$$, 
-                   TypeSystem`NestedGrid`PackagePrivate`$hPos$$, 
-                   TypeSystem`NestedGrid`PackagePrivate`$grid$$, 
-                   TypeSystem`NestedGrid`PackagePrivate`localHold[
-                    TypeSystem`NestedGrid`PackagePrivate`localHold[
-                    TypeSystem`NestedGrid`PackagePrivate`$outputID$$]]][{
-                    Key["JEPQ"]}, 1]]], 
-               TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[
-                TypeSystem`NestedGrid`PackagePrivate`localHold[
-                TypeSystem`NestedGrid`PackagePrivate`$outputID$$]][{
-                 Key["JEPQ"]}, "RowHeader", False], "Mouse"], 
-              ImageSize -> {{44.800000000000004`, Full}, Automatic}, 
-              ImageMargins -> {{5, 3}, {4, 5}}], Background -> 
-             GrayLevel[0.95], Alignment -> {Left, Baseline}], 
-            Item[
-             Pane[
-              Annotation[
-               RawBoxes["0.22"], 
-               TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[
-                TypeSystem`NestedGrid`PackagePrivate`localHold[
-                TypeSystem`NestedGrid`PackagePrivate`$outputID$$]][{
-                 Key["JEPQ"], 
-                 Key["\[Mu]"]}, "Item", False], "Mouse"], 
-              ImageSize -> {{60, Full}, Automatic}, 
-              ImageMargins -> {{5, 3}, {4, 5}}], 
-             ItemSize -> {Full, Automatic}], 
-            Item[
-             Pane[
-              Annotation[
-               RawBoxes["0.13"], 
-               TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[
-                TypeSystem`NestedGrid`PackagePrivate`localHold[
-                TypeSystem`NestedGrid`PackagePrivate`$outputID$$]][{
-                 Key["JEPQ"], 
-                 Key["\[Sigma]"]}, "Item", False], "Mouse"], 
-              ImageSize -> {{60, Full}, Automatic}, 
-              ImageMargins -> {{5, 3}, {4, 5}}], 
-             ItemSize -> {Full, Automatic}], 
-            Item[
-             Pane[
-              Annotation[
-               RawBoxes["1.69"], 
-               TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[
-                TypeSystem`NestedGrid`PackagePrivate`localHold[
-                TypeSystem`NestedGrid`PackagePrivate`$outputID$$]][{
-                 Key["JEPQ"], 
-                 Key["s"]}, "Item", False], "Mouse"], 
-              ImageSize -> {{60, Full}, Automatic}, 
-              ImageMargins -> {{5, 3}, {4, 5}}], 
-             ItemSize -> {Full, Automatic}], 
-            Item[
-             Pane[
-              Annotation[
-               RawBoxes["-0.02"], 
-               TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[
-                TypeSystem`NestedGrid`PackagePrivate`localHold[
-                TypeSystem`NestedGrid`PackagePrivate`$outputID$$]][{
-                 Key["JEPQ"], 
-                 Key["\[Alpha]"]}, "Item", False], "Mouse"], 
-              ImageSize -> {{60, Full}, Automatic}, 
-              ImageMargins -> {{5, 3}, {4, 5}}], 
-             ItemSize -> {Full, Automatic}], 
-            Item[
-             Pane[
-              Annotation[
-               RawBoxes["0.96"], 
-               TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[
-                TypeSystem`NestedGrid`PackagePrivate`localHold[
-                TypeSystem`NestedGrid`PackagePrivate`$outputID$$]][{
-                 Key["JEPQ"], 
-                 Key["\[Beta]"]}, "Item", False], "Mouse"], 
-              ImageSize -> {{60, Full}, Automatic}, 
-              ImageMargins -> {{5, 3}, {4, 5}}], 
-             ItemSize -> {Full, Automatic}], 
-            Item[
-             Pane[
-              Annotation[
-               RawBoxes["-0.11"], 
-               TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[
-                TypeSystem`NestedGrid`PackagePrivate`localHold[
-                TypeSystem`NestedGrid`PackagePrivate`$outputID$$]][{
-                 Key["JEPQ"], 
-                 Key["MDD"]}, "Item", False], "Mouse"], 
-              ImageSize -> {{60, Full}, Automatic}, 
-              ImageMargins -> {{5, 3}, {4, 5}}], 
-             ItemSize -> {Full, Automatic}]}, {
-            Item[
-             Deploy[
-              Pane[
-               Row[{
-                 Spacer[2], 
-                 Style[
-                  Row[{
-                    Button[
-                    MouseAppearance[
-                    Mouseover[
-                    Graphics[{{
-                    EdgeForm[None], 
-                    FaceForm[None], 
-                    Rectangle[{0, 0}, {18, 18}, RoundingRadius -> 2]}, 
-                    Rotate[
-                    Translate[{
-                    CapForm[Round], 
-                    Line[{{0, 0}, {4, 5}, {8, 0}}], 
-                    Line[{{0, 5}, {8, 5}}]}, {5, 6.5}], 0, {9, 9}]}, 
-                    ImageSize -> (1 -> 1), ImagePadding -> {{0, 1}, {1, 0}}, 
-                    BaselinePosition -> Scaled[0.35], BaseStyle -> 
-                    RGBColor[
-                    0.5372549019607843, 0.5372549019607843, 
-                    0.5372549019607843]], 
-                    Graphics[{{
-                    EdgeForm[
-                    RGBColor[
-                    0.27450980392156865`, 0.5411764705882353, 
-                    0.796078431372549]], 
-                    FaceForm[None], 
-                    Rectangle[{0, 0}, {18, 18}, RoundingRadius -> 2]}, 
-                    Rotate[
-                    Translate[{
-                    CapForm[Round], 
-                    RGBColor[
-                    0.27450980392156865`, 0.5411764705882353, 
-                    0.796078431372549], 
-                    Line[{{0, 0}, {4, 5}, {8, 0}}], 
-                    Line[{{0, 5}, {8, 5}}]}, {5, 6.5}], 0, {9, 9}]}, 
-                    ImageSize -> (1 -> 1), ImagePadding -> {{0, 1}, {1, 0}}, 
-                    BaselinePosition -> Scaled[0.35]]], "LinkHand"], 
-                    If[
-                    TypeSystem`NestedGrid`PackagePrivate`checkInteractivity[
-                    TypeSystem`NestedGrid`PackagePrivate`$state$$], 
-                    TypeSystem`NestedGrid`PackagePrivate`$vPos$$ = 
-                    Clip[TypeSystem`NestedGrid`PackagePrivate`$vPos$$ + (-20) 
-                    If[True, 48, 1], {1, 48 - -20 + 1}]; 
-                    TypeSystem`NestedGrid`PackagePrivate`updateState[
-                    TypeSystem`NestedGrid`PackagePrivate`$state$$, 
-                    TypeSystem`NestedGrid`PackagePrivate`$path$$, 
-                    TypeSystem`NestedGrid`PackagePrivate`$vPos$$, 
-                    TypeSystem`NestedGrid`PackagePrivate`$hPos$$, 
-                    TypeSystem`NestedGrid`PackagePrivate`$grid$$, 
-                    TypeSystem`NestedGrid`PackagePrivate`localHold[
-                    TypeSystem`NestedGrid`PackagePrivate`localHold[
-                    TypeSystem`NestedGrid`PackagePrivate`$outputID$$]], True][
-                    TypeSystem`NestedGrid`PackagePrivate`$path$$]], 
-                    Appearance -> None], 
-                    Button[
-                    MouseAppearance[
-                    Mouseover[
-                    Graphics[{{
-                    EdgeForm[None], 
-                    FaceForm[None], 
-                    Rectangle[{0, 0}, {18, 18}, RoundingRadius -> 2]}, 
-                    Rotate[
-                    Translate[{
-                    CapForm[Round], 
-                    Line[{{0, 0}, {4, 5}, {8, 0}}]}, {5, 6.5}], 0, {9, 9}]}, 
-                    ImageSize -> (1 -> 1), ImagePadding -> {{0, 1}, {1, 0}}, 
-                    BaselinePosition -> Scaled[0.35], BaseStyle -> 
-                    RGBColor[
-                    0.5372549019607843, 0.5372549019607843, 
-                    0.5372549019607843]], 
-                    Graphics[{{
-                    EdgeForm[
-                    RGBColor[
-                    0.27450980392156865`, 0.5411764705882353, 
-                    0.796078431372549]], 
-                    FaceForm[None], 
-                    Rectangle[{0, 0}, {18, 18}, RoundingRadius -> 2]}, 
-                    Rotate[
-                    Translate[{
-                    CapForm[Round], 
-                    RGBColor[
-                    0.27450980392156865`, 0.5411764705882353, 
-                    0.796078431372549], 
-                    Line[{{0, 0}, {4, 5}, {8, 0}}]}, {5, 6.5}], 0, {9, 9}]}, 
-                    ImageSize -> (1 -> 1), ImagePadding -> {{0, 1}, {1, 0}}, 
-                    BaselinePosition -> Scaled[0.35]]], "LinkHand"], 
-                    If[
-                    TypeSystem`NestedGrid`PackagePrivate`checkInteractivity[
-                    TypeSystem`NestedGrid`PackagePrivate`$state$$], 
-                    TypeSystem`NestedGrid`PackagePrivate`$vPos$$ = 
-                    Clip[TypeSystem`NestedGrid`PackagePrivate`$vPos$$ + (-20) 
-                    If[False, 48, 1], {1, 48 - -20 + 1}]; 
-                    TypeSystem`NestedGrid`PackagePrivate`updateState[
-                    TypeSystem`NestedGrid`PackagePrivate`$state$$, 
-                    TypeSystem`NestedGrid`PackagePrivate`$path$$, 
-                    TypeSystem`NestedGrid`PackagePrivate`$vPos$$, 
-                    TypeSystem`NestedGrid`PackagePrivate`$hPos$$, 
-                    TypeSystem`NestedGrid`PackagePrivate`$grid$$, 
-                    TypeSystem`NestedGrid`PackagePrivate`localHold[
-                    TypeSystem`NestedGrid`PackagePrivate`localHold[
-                    TypeSystem`NestedGrid`PackagePrivate`$outputID$$]], True][
-                    TypeSystem`NestedGrid`PackagePrivate`$path$$]], 
-                    Appearance -> None], " ", 
-                    Style[
-                    Mouseover[
-                    Style[
-                    Row[{"rows ", 1, "\[Dash]", 20, " of ", 
-                    Style[48, FontWeight -> Bold]}], FontSize -> 
-                    9.333333333333332, FontColor -> 
-                    RGBColor[
-                    0.5098039215686274, 0.5098039215686274, 
-                    0.5098039215686274]], 
-                    Style[
-                    Row[{"rows ", 1, "\[Dash]", 20, " of ", 
-                    Style[48, FontWeight -> Bold]}], FontSize -> 
-                    9.333333333333332, FontColor -> 
-                    RGBColor[
-                    0.5098039215686274, 0.5098039215686274, 
-                    0.5098039215686274]]], ContextMenu -> {
-                    MenuItem["Hide", 
-                    KernelExecute[
-                    
-                    TypeSystem`NestedGrid`PackagePrivate`adjustLimits[{
-                    TypeSystem`NestedGrid`PackagePrivate`$state$$, 
-                    TypeSystem`NestedGrid`PackagePrivate`$path$$, 
-                    TypeSystem`NestedGrid`PackagePrivate`$vPos$$, 
-                    TypeSystem`NestedGrid`PackagePrivate`$hPos$$, 
-                    TypeSystem`NestedGrid`PackagePrivate`$grid$$, 
-                    TypeSystem`NestedGrid`PackagePrivate`localHold[
-                    TypeSystem`NestedGrid`PackagePrivate`$outputID$$]}, 
-                    "Rows", 1, {}]], MenuEvaluator -> Automatic], 
-                    MenuItem["Show up to 10 Rows", 
-                    KernelExecute[
-                    
-                    TypeSystem`NestedGrid`PackagePrivate`adjustLimits[{
-                    TypeSystem`NestedGrid`PackagePrivate`$state$$, 
-                    TypeSystem`NestedGrid`PackagePrivate`$path$$, 
-                    TypeSystem`NestedGrid`PackagePrivate`$vPos$$, 
-                    TypeSystem`NestedGrid`PackagePrivate`$hPos$$, 
-                    TypeSystem`NestedGrid`PackagePrivate`$grid$$, 
-                    TypeSystem`NestedGrid`PackagePrivate`localHold[
-                    TypeSystem`NestedGrid`PackagePrivate`$outputID$$]}, 
-                    "Rows", 10, {}]], MenuEvaluator -> Automatic], 
-                    MenuItem["Show up to 30 Rows", 
-                    KernelExecute[
-                    
-                    TypeSystem`NestedGrid`PackagePrivate`adjustLimits[{
-                    TypeSystem`NestedGrid`PackagePrivate`$state$$, 
-                    TypeSystem`NestedGrid`PackagePrivate`$path$$, 
-                    TypeSystem`NestedGrid`PackagePrivate`$vPos$$, 
-                    TypeSystem`NestedGrid`PackagePrivate`$hPos$$, 
-                    TypeSystem`NestedGrid`PackagePrivate`$grid$$, 
-                    TypeSystem`NestedGrid`PackagePrivate`localHold[
-                    TypeSystem`NestedGrid`PackagePrivate`$outputID$$]}, 
-                    "Rows", 30, {}]], MenuEvaluator -> Automatic], 
-                    MenuItem["Show up to 100 Rows", 
-                    KernelExecute[
-                    
-                    TypeSystem`NestedGrid`PackagePrivate`adjustLimits[{
-                    TypeSystem`NestedGrid`PackagePrivate`$state$$, 
-                    TypeSystem`NestedGrid`PackagePrivate`$path$$, 
-                    TypeSystem`NestedGrid`PackagePrivate`$vPos$$, 
-                    TypeSystem`NestedGrid`PackagePrivate`$hPos$$, 
-                    TypeSystem`NestedGrid`PackagePrivate`$grid$$, 
-                    TypeSystem`NestedGrid`PackagePrivate`localHold[
-                    TypeSystem`NestedGrid`PackagePrivate`$outputID$$]}, 
-                    "Rows", 100, {}]], MenuEvaluator -> Automatic], 
-                    MenuItem["Show All", 
-                    KernelExecute[
-                    
-                    TypeSystem`NestedGrid`PackagePrivate`adjustLimits[{
-                    TypeSystem`NestedGrid`PackagePrivate`$state$$, 
-                    TypeSystem`NestedGrid`PackagePrivate`$path$$, 
-                    TypeSystem`NestedGrid`PackagePrivate`$vPos$$, 
-                    TypeSystem`NestedGrid`PackagePrivate`$hPos$$, 
-                    TypeSystem`NestedGrid`PackagePrivate`$grid$$, 
-                    TypeSystem`NestedGrid`PackagePrivate`localHold[
-                    TypeSystem`NestedGrid`PackagePrivate`$outputID$$]}, 
-                    "Rows", 100000000, {}]], MenuEvaluator -> Automatic]}], 
-                    " ", 
-                    Button[
-                    MouseAppearance[
-                    Mouseover[
-                    Graphics[{{
-                    EdgeForm[None], 
-                    FaceForm[None], 
-                    Rectangle[{0, 0}, {18, 18}, RoundingRadius -> 2]}, 
-                    Rotate[
-                    Translate[{
-                    CapForm[Round], 
-                    Line[{{0, 0}, {4, 5}, {8, 0}}]}, {5, 6.5}], 180 Degree, {
-                    9, 9}]}, ImageSize -> (1 -> 1), 
-                    ImagePadding -> {{0, 1}, {1, 0}}, BaselinePosition -> 
-                    Scaled[0.35], BaseStyle -> 
-                    RGBColor[
-                    0.5372549019607843, 0.5372549019607843, 
-                    0.5372549019607843]], 
-                    Graphics[{{
-                    EdgeForm[
-                    RGBColor[
-                    0.27450980392156865`, 0.5411764705882353, 
-                    0.796078431372549]], 
-                    FaceForm[None], 
-                    Rectangle[{0, 0}, {18, 18}, RoundingRadius -> 2]}, 
-                    Rotate[
-                    Translate[{
-                    CapForm[Round], 
-                    RGBColor[
-                    0.27450980392156865`, 0.5411764705882353, 
-                    0.796078431372549], 
-                    Line[{{0, 0}, {4, 5}, {8, 0}}]}, {5, 6.5}], 180 Degree, {
-                    9, 9}]}, ImageSize -> (1 -> 1), 
-                    ImagePadding -> {{0, 1}, {1, 0}}, BaselinePosition -> 
-                    Scaled[0.35]]], "LinkHand"], 
-                    If[
-                    TypeSystem`NestedGrid`PackagePrivate`checkInteractivity[
-                    TypeSystem`NestedGrid`PackagePrivate`$state$$], 
-                    TypeSystem`NestedGrid`PackagePrivate`$vPos$$ = 
-                    Clip[TypeSystem`NestedGrid`PackagePrivate`$vPos$$ + 
-                    20 If[False, 48, 1], {1, 48 - 20 + 1}]; 
-                    TypeSystem`NestedGrid`PackagePrivate`updateState[
-                    TypeSystem`NestedGrid`PackagePrivate`$state$$, 
-                    TypeSystem`NestedGrid`PackagePrivate`$path$$, 
-                    TypeSystem`NestedGrid`PackagePrivate`$vPos$$, 
-                    TypeSystem`NestedGrid`PackagePrivate`$hPos$$, 
-                    TypeSystem`NestedGrid`PackagePrivate`$grid$$, 
-                    TypeSystem`NestedGrid`PackagePrivate`localHold[
-                    TypeSystem`NestedGrid`PackagePrivate`localHold[
-                    TypeSystem`NestedGrid`PackagePrivate`$outputID$$]], True][
-                    TypeSystem`NestedGrid`PackagePrivate`$path$$]], 
-                    Appearance -> None], 
-                    Button[
-                    MouseAppearance[
-                    Mouseover[
-                    Graphics[{{
-                    EdgeForm[None], 
-                    FaceForm[None], 
-                    Rectangle[{0, 0}, {18, 18}, RoundingRadius -> 2]}, 
-                    Rotate[
-                    Translate[{
-                    CapForm[Round], 
-                    Line[{{0, 0}, {4, 5}, {8, 0}}], 
-                    Line[{{0, 5}, {8, 5}}]}, {5, 6.5}], 180 Degree, {9, 9}]}, 
-                    ImageSize -> (1 -> 1), ImagePadding -> {{0, 1}, {1, 0}}, 
-                    BaselinePosition -> Scaled[0.35], BaseStyle -> 
-                    RGBColor[
-                    0.5372549019607843, 0.5372549019607843, 
-                    0.5372549019607843]], 
-                    Graphics[{{
-                    EdgeForm[
-                    RGBColor[
-                    0.27450980392156865`, 0.5411764705882353, 
-                    0.796078431372549]], 
-                    FaceForm[None], 
-                    Rectangle[{0, 0}, {18, 18}, RoundingRadius -> 2]}, 
-                    Rotate[
-                    Translate[{
-                    CapForm[Round], 
-                    RGBColor[
-                    0.27450980392156865`, 0.5411764705882353, 
-                    0.796078431372549], 
-                    Line[{{0, 0}, {4, 5}, {8, 0}}], 
-                    Line[{{0, 5}, {8, 5}}]}, {5, 6.5}], 180 Degree, {9, 9}]}, 
-                    ImageSize -> (1 -> 1), ImagePadding -> {{0, 1}, {1, 0}}, 
-                    BaselinePosition -> Scaled[0.35]]], "LinkHand"], 
-                    If[
-                    TypeSystem`NestedGrid`PackagePrivate`checkInteractivity[
-                    TypeSystem`NestedGrid`PackagePrivate`$state$$], 
-                    TypeSystem`NestedGrid`PackagePrivate`$vPos$$ = 
-                    Clip[TypeSystem`NestedGrid`PackagePrivate`$vPos$$ + 
-                    20 If[True, 48, 1], {1, 48 - 20 + 1}]; 
-                    TypeSystem`NestedGrid`PackagePrivate`updateState[
-                    TypeSystem`NestedGrid`PackagePrivate`$state$$, 
-                    TypeSystem`NestedGrid`PackagePrivate`$path$$, 
-                    TypeSystem`NestedGrid`PackagePrivate`$vPos$$, 
-                    TypeSystem`NestedGrid`PackagePrivate`$hPos$$, 
-                    TypeSystem`NestedGrid`PackagePrivate`$grid$$, 
-                    TypeSystem`NestedGrid`PackagePrivate`localHold[
-                    TypeSystem`NestedGrid`PackagePrivate`localHold[
-                    TypeSystem`NestedGrid`PackagePrivate`$outputID$$]], True][
-                    TypeSystem`NestedGrid`PackagePrivate`$path$$]], 
-                    Appearance -> None]}], ContextMenu -> {}]}], 
-               ImageMargins -> {{0, -1}, {-1, 1}}]], Background -> 
-             RGBColor[
-              0.9764705882352941, 0.9764705882352941, 0.9764705882352941], 
-             Alignment -> {Left, Top}], SpanFromLeft, SpanFromLeft, 
-            SpanFromLeft, SpanFromLeft, SpanFromLeft, SpanFromLeft}}, 
+             ItemSize -> {Full, Automatic}]}}, 
           BaseStyle -> {
            ContextMenu -> 
             Dynamic[TypeSystem`NestedGrid`PackagePrivate`$contextMenuTrigger; 
@@ -3393,13 +764,13 @@ lastPathIsLeafHeader, TypeSystem`NestedGrid`PackagePrivate`headerHidden$ = And[
         Hold[
           TypeSystem`NestedGrid`PackagePrivate`localHold[
           TypeSystem`NestedGrid`PackagePrivate`$outputID$$]]], StandardForm],
-      ImageSizeCache->{500., {378.41754150390625`, 385.58245849609375`}},
+      ImageSizeCache->{57., {143.91754150390625`, 151.08245849609375`}},
       TrackedSymbols:>{
        TypeSystem`NestedGrid`PackagePrivate`$state$$, 
         TypeSystem`NestedGrid`PackagePrivate`$grid$$}], 
      TypeSystem`NestedGrid`PackagePrivate`mouseAnnotation$$ = 
      MouseAnnotation[],
-     ImageSizeCache->{500., {378.41754150390625`, 385.58245849609375`}}],
+     ImageSizeCache->{57., {143.91754150390625`, 151.08245849609375`}}],
     BaseStyle->{LineBreakWithin -> False},
     DynamicModuleValues:>{},
     Initialization:>(TypeSystem`NestedGrid`PackagePrivate`$outputID$$ = 
@@ -3411,17 +782,12 @@ lastPathIsLeafHeader, TypeSystem`NestedGrid`PackagePrivate`headerHidden$ = And[
   Editable->False,
   SelectWithContents->True,
   Selectable->False]], "Output",
- CellChangeTimes->{
-  3.9340866404930363`*^9, {3.934086753563396*^9, 3.934086760487742*^9}, 
-   3.934087743378398*^9, 3.934088232721765*^9, 3.934088368114936*^9, 
-   3.9340884697331667`*^9, 3.934088504979401*^9, 3.934089214125589*^9, 
-   3.9340895267035217`*^9, 3.934089778131722*^9, 3.934090992948505*^9, 
-   3.934091342856266*^9},
- CellLabel->"Out[54]=",ExpressionUUID->"290a9aaa-66ca-486d-9ea2-04666cf21a2d"]
+ CellChangeTimes->{{3.93409875422521*^9, 3.9340987667131147`*^9}},
+ CellLabel->"Out[48]=",ExpressionUUID->"6dd4fa70-654d-4f2c-aea3-0138ccb91059"]
 }, Open  ]]
 },
 WindowSize->{1051, 881},
-WindowMargins->{{300, Automatic}, {Automatic, 0}},
+WindowMargins->{{Automatic, 287}, {Automatic, 0}},
 TaggingRules-><|"TryRealOnly" -> False|>,
 FrontEndVersion->"14.0 for Mac OS X ARM (64-bit) (December 12, 2023)",
 StyleDefinitions->"Default.nb",
@@ -3438,12 +804,12 @@ CellTagsIndex->{}
 *)
 (*NotebookFileOutline
 Notebook[{
-Cell[558, 20, 2600, 50, 250, "Input",ExpressionUUID->"59035411-372f-4924-bc76-32ba4bade73c"],
-Cell[3161, 72, 3728, 87, 509, "Input",ExpressionUUID->"94155444-c99c-43ec-b907-7879387fe901"],
-Cell[6892, 161, 2010, 47, 220, "Input",ExpressionUUID->"6dbb2790-1b78-4834-b4e5-e93d1c62f2ae"],
+Cell[558, 20, 6383, 142, 773, "Input",ExpressionUUID->"59035411-372f-4924-bc76-32ba4bade73c"],
+Cell[6944, 164, 2008, 46, 194, "Input",ExpressionUUID->"6dbb2790-1b78-4834-b4e5-e93d1c62f2ae"],
+Cell[8955, 212, 5632, 131, 446, "Input",ExpressionUUID->"248ab0d9-7efe-4df0-80d6-9845cbb0e07b"],
 Cell[CellGroupData[{
-Cell[8927, 212, 4240, 114, 350, "Input",ExpressionUUID->"248ab0d9-7efe-4df0-80d6-9845cbb0e07b"],
-Cell[13170, 328, 153333, 3091, 787, "Output",ExpressionUUID->"290a9aaa-66ca-486d-9ea2-04666cf21a2d"]
+Cell[14612, 347, 791, 20, 64, "Input",ExpressionUUID->"2b9be3a9-2591-4421-a1da-c5b964d4dcf2"],
+Cell[15406, 369, 23466, 416, 319, "Output",ExpressionUUID->"6dd4fa70-654d-4f2c-aea3-0138ccb91059"]
 }, Open  ]]
 }
 ]
